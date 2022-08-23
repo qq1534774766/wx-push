@@ -1,0 +1,26 @@
+#去申请 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+wx:
+  config:
+    appId: "wx71cd4b7e1d5d4925"
+    appSecret: "6a74395ba52d02630561031c50c53b0b"
+    #模板Id
+    templateId: "eN3M6KaieLzglWqK3UKA5y5yhf0ecoB-tlVNNpU11ro"
+    openid: "oHely6JQRDrQf5EAKkpuuGjY2xKU"
+
+message:
+  config:
+    birthday1: "11-20" #生日日期
+    birthday2: "08-31"
+    togetherDate: "2021-04-23" #填你们在一起的那天日期
+    message: "Have a happy day and love you"
+
+#去申请 https://tianqiapi.com/user/login
+weather:
+  config:
+    appid: "85348823"
+    appSecret: "Rw8IPu8O"
+    city: "广州"
+
+server:
+  port: 8081
+

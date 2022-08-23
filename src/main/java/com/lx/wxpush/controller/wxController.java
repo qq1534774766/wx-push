@@ -43,6 +43,7 @@ public class wxController {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/text");
         response.getWriter().write("更新成功");
+        sendService.sendWeChatMsg();
     }
 
 

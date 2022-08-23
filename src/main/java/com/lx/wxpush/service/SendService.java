@@ -7,5 +7,4 @@ package com.lx.wxpush.service;
  */
 public interface SendService {
     String sendWeChatMsg();
-    String  getAccessToken();
 }

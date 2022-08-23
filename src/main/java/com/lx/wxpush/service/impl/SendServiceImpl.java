@@ -32,8 +32,7 @@ public class SendServiceImpl implements SendService {
     private ConfigConstant configConstant;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public String  getAccessToken() {
+    private String  getAccessToken() {
         //这里直接写死就可以，不用改，用法可以去看api
         String grant_type = "client_credential";
         //封装请求数据

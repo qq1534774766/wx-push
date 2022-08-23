@@ -1,30 +1,17 @@
 package com.lx.wxpush.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.service.ProverbService;
 import com.lx.wxpush.service.SendService;
-import com.lx.wxpush.service.TianqiService;
-import com.lx.wxpush.utils.DateUtil;
-import com.lx.wxpush.utils.HttpUtil;
-import com.lx.wxpush.utils.JsonObjectUtil;
-import jdk.nashorn.internal.scripts.JO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.*;
 
 @RestController
-@RequestMapping("/wx")
 public class wxController {
 
     @Autowired

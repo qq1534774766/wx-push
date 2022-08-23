@@ -1,7 +1,10 @@
 package com.lx.wxpush.constant;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 /**
  * @Author: wenqiaogang
@@ -9,34 +12,37 @@ import org.springframework.stereotype.Component;
  * @Description: TODO
  */
 @Component
+@ConfigurationProperties(prefix = "wx.config")
 public class ConfigConstant {
     @Value("${wx.config.appId}")
-    public  String appId;
+    public String appId;
     @Value("${wx.config.appSecret}")
-    public  String appSecret;
+    public String appSecret;
     @Value("${wx.config.templateId}")
-    public  String templateId;
-    @Value("${wx.config.openid}")
-    public String openid;
-    @Value("${weather.config.appid}")
-    public  String weatherAppId;
-    @Value("${weather.config.appSecret}")
-    public  String weatherAppSecret;
-    
-    @Value("${weather.config.city}")
-    public  String city;
-    @Value("${message.config.togetherDate}")
-    public  String togetherDate;
-    @Value("${message.config.birthday1}")
-    public  String birthday1;
-    @Value("${message.config.birthday2}")
-    public  String birthday2;
-    @Value("${message.config.message}")
-    public  String message;
+    public String templateId;
+
+    public ArrayList<String> openidList;
 
     public String getAppId() {
         return appId;
     }
+
+    @Value("${weather.config.appid}")
+    public String weatherAppId;
+
+    @Value("${weather.config.appSecret}")
+    public String weatherAppSecret;
+    @Value("${weather.config.city}")
+    public String city;
+    @Value("${message.config.togetherDate}")
+    public String togetherDate;
+    @Value("${message.config.birthday1}")
+    public  String birthday1;
+    @Value("${message.config.birthday2}")
+    public  String birthday2;
+
+    @Value("${message.config.message}")
+    public  String message;
 
     public void setAppId(String appId) {
         this.appId = appId;
@@ -58,13 +64,6 @@ public class ConfigConstant {
         this.templateId = templateId;
     }
 
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
 
     public String getWeatherAppId() {
         return weatherAppId;
@@ -120,5 +119,13 @@ public class ConfigConstant {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public ArrayList<String> getOpenidList() {
+        return openidList;
+    }
+
+    public void setOpenidList(ArrayList<String> openidList) {
+        this.openidList = openidList;
     }
 }

@@ -9,6 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lx</groupId>
+    <packaging>war</packaging>
     <artifactId>wx-push</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wx-push</name>
@@ -20,6 +21,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <!--            剔除Tomcat,为了开发方便-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--添加servlet的依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -70,7 +85,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.aguo.blogapi.BlogApiApplication</mainClass>
+                    <mainClass>com.lx.wxpush.WxPushApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

@@ -54,17 +54,16 @@ public class SendServiceImpl implements SendService {
     @Override
     public String sendWeChatMsg() {
         String accessToken = getAccessToken();
-        String[] openIds = configConstant.getOpenid().split(",");
         List<JSONObject> errorList = new ArrayList();
         HashMap<String,Object> resultMap = new HashMap<>();
-        for (String opedId : openIds) {
+        for (String opedId : configConstant.getOpenidList()) {
 
             //今天
             String date = DateUtil.formatDate(new Date(), "yyyy-MM-dd");
             String week = DateUtil.getWeekOfDate(new Date());
             String day = date + " " + week;
-            JSONObject first = JsonObjectUtil.packJsonObject(day,"#EED016");
-            resultMap.put("first",first);
+            JSONObject first = JsonObjectUtil.packJsonObject(day, "#EED016");
+            resultMap.put("first", first);
             //处理天气
             JSONObject weatherResult = tianqiService.getWeatherByCity();
             //城市

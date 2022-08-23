@@ -5,7 +5,9 @@ wx:
     appSecret: "6a74395ba52d02630561031c50c53b0b"
     #模板Id
     templateId: "eN3M6KaieLzglWqK3UKA5y5yhf0ecoB-tlVNNpU11ro"
-    openid: "oHely6JQRDrQf5EAKkpuuGjY2xKU"
+    openidList:
+      - "oHely6JQRDrQf5EAKkpuuGjY2xKU"
+      - "oHely6NR5uJRyH4ugY9pumex8Q8Y"
 
 message:
   config:

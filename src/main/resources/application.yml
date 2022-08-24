@@ -4,7 +4,7 @@ wx:
     appId: "wx71cd4b7e1d5d4925"
     appSecret: "6a74395ba52d02630561031c50c53b0b"
     #模板Id
-    templateId: "yfsjk_0YW7wxa5AHhp8ddTAKcDHULSFn7hSsXiivfEQ"
+    templateId: "_q72VbQPIWQ7BCoQ6fKrLNL_y_AjI5ovBIvxM4G517Q"
     openidList:
       - "oHely6JQRDrQf5EAKkpuuGjY2xKU"
       - "oHely6NR5uJRyH4ugY9pumex8Q8Y"
@@ -22,6 +22,9 @@ weather:
     appid: "85348823"
     appSecret: "Rw8IPu8O"
     city: "广州"
+#注册并购买第二档次，有券，直接白嫖 https://www.apispace.com/eolink/api/myjj/introduction
+ApiSpace:
+  token: "5cc26sj7p4rosgf7ckb2wnusb1t21tl0"
 
 server:
   port: 8081

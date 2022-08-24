@@ -64,26 +64,42 @@ public class SendServiceImpl implements SendService {
             String day = date + " " + week;
             JSONObject first = JsonObjectUtil.packJsonObject(day, "#EED016");
             resultMap.put("first", first);
-            //处理天气
-            JSONObject weatherResult = tianqiService.getWeatherByCity();
-            //城市
-            JSONObject city = JsonObjectUtil.packJsonObject(weatherResult.getString("city"),"#60AEF2");
-            resultMap.put("city",city);
-            //天气
-            JSONObject weather = JsonObjectUtil.packJsonObject(weatherResult.getString("wea"),"#b28d0a");
-            resultMap.put("weather",weather);
-            //最低气温
-            JSONObject minTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_night") + "°","#0ace3c");
-            resultMap.put("minTemperature",minTemperature);
-            //最高气温
-            JSONObject maxTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_day") + "°","#dc1010");
-            resultMap.put("maxTemperature",maxTemperature);
-            //风
-            JSONObject wind = JsonObjectUtil.packJsonObject(weatherResult.getString("win")+","+weatherResult.getString("win_speed"),"#6e6e6e");
-            resultMap.put("wind",wind);
-            //湿度
-            JSONObject wet = JsonObjectUtil.packJsonObject(weatherResult.getString("humidity"),"#1f95c5");
-            resultMap.put("wet",wet);
+            try {
+                //处理天气
+                JSONObject weatherResult = tianqiService.getWeatherByCity();
+                //城市
+                JSONObject city = JsonObjectUtil.packJsonObject(weatherResult.getString("city"),"#60AEF2");
+                resultMap.put("city",city);
+                //天气
+                JSONObject weather = JsonObjectUtil.packJsonObject(weatherResult.getString("wea"),"#b28d0a");
+                resultMap.put("weather",weather);
+                //最低气温
+                JSONObject minTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_night") + "°","#0ace3c");
+                resultMap.put("minTemperature",minTemperature);
+                //最高气温
+                JSONObject maxTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_day") + "°","#dc1010");
+                resultMap.put("maxTemperature",maxTemperature);
+                //风
+                JSONObject wind = JsonObjectUtil.packJsonObject(weatherResult.getString("win")+","+weatherResult.getString("win_speed"),"#6e6e6e");
+                resultMap.put("wind",wind);
+                //湿度
+                JSONObject wet = JsonObjectUtil.packJsonObject(weatherResult.getString("humidity"),"#1f95c5");
+                resultMap.put("wet",wet);
+                //未来三天天气
+                Map<String, String> map = tianqiService.getTheNextThreeDaysWeather();
+                JSONObject day1_wea = JsonObjectUtil.packJsonObject(map.get("今"), isContainsRain(map.get("今")));
+                JSONObject day2_wea = JsonObjectUtil.packJsonObject(map.get("明"), isContainsRain(map.get("明")));
+                JSONObject day3_wea = JsonObjectUtil.packJsonObject(map.get("后"), isContainsRain(map.get("后")));
+                resultMap.put("day1_wea",day1_wea);
+                resultMap.put("day2_wea",day2_wea);
+                resultMap.put("day3_wea",day3_wea);
+            } catch (Exception e) {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("天气获取错误","检查apiSpace配置的token正确与否");
+                errorList.add(new JSONObject(map));
+                throw new RuntimeException("天气获取失败");
+            }
+
 
             //生日
             resultMap.put("birthDate1",getBirthday(configConstant.getBirthday1(), date));
@@ -153,5 +169,9 @@ public class SendServiceImpl implements SendService {
             logger.error("togetherDate获取失败" + e.getMessage());
         }
         return JsonObjectUtil.packJsonObject(birthDay,"#6EEDE2");
+    }
+
+    private String isContainsRain(String s){
+        return s.contains("雨")?"#1f95c5":"#b28d0a";
     }
 }

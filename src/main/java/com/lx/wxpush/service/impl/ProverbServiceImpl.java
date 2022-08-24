@@ -1,11 +1,15 @@
 package com.lx.wxpush.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lx.wxpush.constant.ConfigConstant;
 import com.lx.wxpush.service.ProverbService;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -16,6 +20,8 @@ import java.util.Random;
  */
 @Service
 public class ProverbServiceImpl implements ProverbService {
+    @Autowired
+    private ConfigConstant configConstant;
     @Override
     public String getOneProverbRandom() {
         String proverb;
@@ -71,7 +77,7 @@ public class ProverbServiceImpl implements ProverbService {
             Request request = new Request.Builder()
                     .url("https://eolink.o.apispace.com/myjj/common/aphorism/getAphorismList")
                     .method("POST",body)
-                    .addHeader("X-APISpace-Token","5cc26sj7p4rosgf7ckb2wnusb1t21tl0")
+                    .addHeader("X-APISpace-Token",configConstant.getToken())
                     .addHeader("Authorization-Type","apikey")
                     .addHeader("Content-Type","")
                     .build();

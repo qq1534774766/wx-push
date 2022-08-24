@@ -1,4 +1,4 @@
-package com.lx.wxpush.utils;
+package com.aguo.wxpush.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

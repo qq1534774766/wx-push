@@ -1,8 +1,4 @@
-package com.lx.wxpush.service;
-
-import com.alibaba.fastjson.JSONObject;
-
-import java.io.IOException;
+package com.aguo.wxpush.service;
 
 /**
  * @Author: wenqiaogang

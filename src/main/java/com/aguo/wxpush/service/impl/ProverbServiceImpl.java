@@ -1,15 +1,13 @@
-package com.lx.wxpush.service.impl;
+package com.aguo.wxpush.service.impl;
 
+import com.aguo.wxpush.constant.ConfigConstant;
+import com.aguo.wxpush.service.ProverbService;
 import com.alibaba.fastjson.JSONObject;
-import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.service.ProverbService;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 

@@ -1,4 +1,4 @@
-package com.lx.wxpush.constant;
+package com.aguo.wxpush.constant;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

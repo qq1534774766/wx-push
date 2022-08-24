@@ -1,12 +1,12 @@
-package com.lx.wxpush.utils;
- 
-import com.lx.wxpush.entity.TextMessage;
+package com.aguo.wxpush.utils;
+
+import com.aguo.wxpush.entity.TextMessage;
 import com.thoughtworks.xstream.XStream;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
- 
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;

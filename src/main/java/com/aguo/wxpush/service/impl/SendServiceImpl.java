@@ -1,15 +1,15 @@
-package com.lx.wxpush.service.impl;
+package com.aguo.wxpush.service.impl;
 
+import com.aguo.wxpush.constant.ConfigConstant;
+import com.aguo.wxpush.entity.TextMessage;
+import com.aguo.wxpush.service.ProverbService;
+import com.aguo.wxpush.service.SendService;
+import com.aguo.wxpush.service.TianqiService;
+import com.aguo.wxpush.utils.DateUtil;
+import com.aguo.wxpush.utils.HttpUtil;
+import com.aguo.wxpush.utils.JsonObjectUtil;
+import com.aguo.wxpush.utils.MessageUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.entity.TextMessage;
-import com.lx.wxpush.service.ProverbService;
-import com.lx.wxpush.service.SendService;
-import com.lx.wxpush.service.TianqiService;
-import com.lx.wxpush.utils.DateUtil;
-import com.lx.wxpush.utils.HttpUtil;
-import com.lx.wxpush.utils.JsonObjectUtil;
-import com.lx.wxpush.utils.MessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

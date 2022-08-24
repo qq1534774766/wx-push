@@ -53,7 +53,7 @@
   <component name="RunManager">
     <configuration name="WxPushApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="wx-push" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lx.wxpush.WxPushApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aguo.wxpush.WxPushApplication"/>
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SHORTEN_COMMAND_LINE" value="NONE" />
       <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />

@@ -1,13 +1,11 @@
-package com.lx.wxpush.controller;
+package com.aguo.wxpush.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.service.SendService;
+import com.aguo.wxpush.constant.ConfigConstant;
+import com.aguo.wxpush.service.SendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

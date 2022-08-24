@@ -1,10 +1,9 @@
-package com.lx.wxpush.service.impl;
+package com.aguo.wxpush.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
+import com.aguo.wxpush.constant.ConfigConstant;
+import com.aguo.wxpush.service.TianqiService;
+import com.aguo.wxpush.utils.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.service.TianqiService;
-import com.lx.wxpush.utils.HttpUtil;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,9 +14,9 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * @Author: wenqiaogang

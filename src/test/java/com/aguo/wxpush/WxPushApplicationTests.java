@@ -1,18 +1,14 @@
-package com.lx.wxpush;
+package com.aguo.wxpush;
 
-import com.lx.wxpush.constant.ConfigConstant;
-import com.lx.wxpush.service.ProverbService;
-import com.lx.wxpush.service.TianqiService;
+import com.aguo.wxpush.constant.ConfigConstant;
+import com.aguo.wxpush.service.ProverbService;
+import com.aguo.wxpush.service.TianqiService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @SpringBootTest
 class WxPushApplicationTests {

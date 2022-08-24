@@ -2,17 +2,21 @@ package com.lx.wxpush.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lx.wxpush.constant.ConfigConstant;
+import com.lx.wxpush.entity.TextMessage;
 import com.lx.wxpush.service.ProverbService;
 import com.lx.wxpush.service.SendService;
 import com.lx.wxpush.service.TianqiService;
 import com.lx.wxpush.utils.DateUtil;
 import com.lx.wxpush.utils.HttpUtil;
 import com.lx.wxpush.utils.JsonObjectUtil;
+import com.lx.wxpush.utils.MessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.*;
 
@@ -173,5 +177,23 @@ public class SendServiceImpl implements SendService {
 
     private String isContainsRain(String s){
         return s.contains("雨")?"#1f95c5":"#b28d0a";
+    }
+
+    public String messageHandle(HttpServletRequest request, HttpServletResponse response) {
+        response.setCharacterEncoding("utf-8");
+        Map<String, String> resultMap = MessageUtil.parseXml(request);
+        TextMessage textMessage = new TextMessage();
+        textMessage.setToUserName(resultMap.get("FromUserName"));
+        textMessage.setFromUserName(resultMap.get("ToUserName"));
+        Date date = new Date();
+        textMessage.setCreateTime(date.getTime());
+        textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
+
+        if ("text".equals(resultMap.get("MsgType"))) {
+            textMessage.setContent(resultMap.get("Content"));
+        } else {
+            textMessage.setContent("目前仅支持文本呦");
+        }
+        return textMessage.getContent();
     }
 }

@@ -7,12 +7,23 @@
         *{
             color: #1f95c5;
         }
+        form {
+            text-align: center;
+            margin-top: 100px;
+        }
+        * {
+            font-size: 18px;
+        }
+        input[type=submit] {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <form action="./changeConfig" method="get">
-        城市：<input name="city" type="text" value="广州">(最多到区) <br>
+        <p>更新配置</p>
+        目标天气城市：<input name="city" type="text" value="广州市">(最多到区) <br>
 <!--        推送时间：<input name="time" type="text" value="8:00"> <br>-->
         <input type="submit" value="提交">
     </form>

@@ -4,13 +4,13 @@ wx公众号推送，Java版本
 
 # 目录：
 
-[1.准备](#1. 准备)
+[1.通用准备](#1.准备)
 
 [2.面向开发者](#2.面向开发者)
 
-[3.面向小白](# 3. 面向小白)
+[3.面向小白](#3.面向小白)
 
-# 1. 准备
+# 1.通用准备
 
 ## 1.1 申请微信公众号
 
@@ -115,7 +115,33 @@ wx公众号推送，Java版本
 ### 2.4.2 云服务器自动推送
 
 - 如果你有云服务器，就能实现24h自动推送啦
-- 简单讲解，
-  - 
 
-# 3. 面向小白
+- 简单讲解，
+
+  - 打包
+
+    ![image-20220825114120159](https://i0.hdslb.com/bfs/album/e934c8693c0a5b6b252f33e682fe1c04ee92c6a0.png)
+
+  - 部署
+
+    ![image-20220825114149760](https://i0.hdslb.com/bfs/album/cfa98f1a7d73d6958adc45abae9cfd2c304e74c8.png)
+
+    ------------------------------------------------------
+
+    ![image-20220825114220959](https://i0.hdslb.com/bfs/album/d319b4c48a2319abf24e12e51a08fca0cb2f7f27.png)
+
+  - 上传
+
+    ![image-20220825114527103](https://i0.hdslb.com/bfs/album/dfca31d85e2c663be077f2dedb706c62668d4555.png)
+
+    然后运行指令：
+
+    ```bash
+    nohup java -jar wx.jar >wx.txt &
+    ```
+
+    ![image-20220825114725051](https://i0.hdslb.com/bfs/album/b4b38a829cec57bce000ac737ff20a2222f190e3.png)
+
+  - 成功~
+
+# 3.面向小白

@@ -1,6 +1,4 @@
-# wx-push
-
-wx公众号推送，Java版本
+Java版本
 
 # 目录：
 

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lx</groupId>
-    <packaging>war</packaging>
+<!--    <packaging>war</packaging>-->
     <artifactId>wx-push</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wx-push</name>

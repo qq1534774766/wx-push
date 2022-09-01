@@ -60,6 +60,7 @@ public class SendServiceImpl implements SendService {
         String accessToken = getAccessToken();
         List<JSONObject> errorList = new ArrayList();
         HashMap<String,Object> resultMap = new HashMap<>();
+        //遍历用户的ID，保证每个用户都收到推送
         for (String opedId : configConstant.getOpenidList()) {
 
             //今天
@@ -67,6 +68,7 @@ public class SendServiceImpl implements SendService {
             String week = DateUtil.getWeekOfDate(new Date());
             String day = date + " " + week;
             JSONObject first = JsonObjectUtil.packJsonObject(day, "#EED016");
+            //今天的时间
             resultMap.put("first", first);
             try {
                 //处理天气
@@ -98,6 +100,7 @@ public class SendServiceImpl implements SendService {
                 resultMap.put("day2_wea",day2_wea);
                 resultMap.put("day3_wea",day3_wea);
             } catch (Exception e) {
+                e.printStackTrace();
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("天气获取错误","检查apiSpace配置的token正确与否");
                 errorList.add(new JSONObject(map));
@@ -112,8 +115,8 @@ public class SendServiceImpl implements SendService {
             //在一起时间
             resultMap.put("togetherDate",togetherDay(date));
             //每日一句,中文
-            String noteZh = proverbService.getOneProverbRandom();
-            JSONObject note_Zh = JsonObjectUtil.packJsonObject(noteZh,"#879191");
+            String noteZh = proverbService.getOneNormalProverb();
+            JSONObject note_Zh = JsonObjectUtil.packJsonObject(noteZh, "#879191");
             resultMap.put("note_Zh",note_Zh);
             //每日一句，英文
             JSONObject note_En = JsonObjectUtil.packJsonObject(proverbService.translateToEnglish(noteZh),"#879191");
@@ -125,7 +128,6 @@ public class SendServiceImpl implements SendService {
         result.put("result", "success");
         result.put("errorData", errorList);
         return result.toJSONString();
-
     }
 
     private void sendMessage(String accessToken, List<JSONObject> errorList, HashMap<String, Object> resultMap, String opedId) {

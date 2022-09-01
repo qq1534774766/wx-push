@@ -49,7 +49,7 @@ public class TianqiServiceImpl implements TianqiService {
                     .addQueryParameter("appid",configConstant.getWeatherAppId())
                     .addQueryParameter("appsecret",configConstant.getWeatherAppSecret())
                     .addQueryParameter("city",configConstant.getCity())
-                    .addQueryParameter("unescape","1")
+                    .addQueryParameter("unescape", "1")
                     .build();
             Request request = new Request.Builder()
                     .url(url)
@@ -59,20 +59,28 @@ public class TianqiServiceImpl implements TianqiService {
             String responseResult = response.body().string();
             LocalDate now = LocalDate.now();
             //封装今天，明天，后天的时间
-            Map<String,String> daySet = new HashMap<>();
-            daySet.put(String.valueOf(now.getDayOfMonth()),"今");
-            daySet.put(String.valueOf(now.plusDays(1L).getDayOfMonth()),"明");
-            daySet.put(String.valueOf(now.plusDays(2L).getDayOfMonth()),"后");
+            /**
+             * 原因分析：从天气api获取到未来的天气的日期是 01  02  03 的两位数。
+             * 而Java中的LocalDate的日期，是一位数的 1  2  3 。
+             * 因为一开始用是String类型比较，所以01≠1，最后导致异常。
+             */
+            Map<Integer, String> daySet = new HashMap<>();
+            daySet.put(now.getDayOfMonth(), "今");
+            daySet.put(now.plusDays(1L).getDayOfMonth(), "明");
+            daySet.put(now.plusDays(2L).getDayOfMonth(), "后");
             //过滤，提取结果
-            map = JSONObject.parseObject(responseResult).getJSONArray("data").stream()
+            JSONObject jsonObject = JSONObject.parseObject(responseResult);
+            map = jsonObject.getJSONArray("data").stream()
                     .peek(o -> {
-                        String date = ((JSONObject) o).getString("date").substring(8);
-                        ((JSONObject) o).put("date",date);
+                        String date = getStringFromJson(o, "date").substring(8);
+                        ((JSONObject) o).put("date", date);
                     })
-                    .filter(o-> daySet.containsKey(((JSONObject) o).getString("date")))
-                    .collect(Collectors.toMap(o -> daySet.get(((JSONObject) o).getString("date")),
-                            o -> ((JSONObject) o).getString("wea")));
+                    .filter(o -> daySet.containsKey(getIntegerFromJson(o, "date")))
+                    .collect(Collectors.toMap(
+                            key -> daySet.get(getIntegerFromJson(key, "date")),
+                            value -> getStringFromJson(value, "wea")));
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException("获取失败");
         }
         return map;
@@ -84,7 +92,22 @@ public class TianqiServiceImpl implements TianqiService {
         String sendGet = HttpUtil.sendGet(TemperatureUrl, null);
         return JSONObject.parseObject(sendGet);
     }
-    private String hasTextOrDefault(String s){
-        return StringUtils.hasText(s)?s:"无法识别";
+
+    private String hasTextOrDefault(String s) {
+        return StringUtils.hasText(s) ? s : "无法识别";
+    }
+
+    private String getStringFromJson(Object obj, String key) {
+        if (obj instanceof JSONObject) {
+            return ((JSONObject) obj).getString(key);
+        }
+        return null;
+    }
+
+    private Integer getIntegerFromJson(Object obj, String key) {
+        if (obj instanceof JSONObject) {
+            return Integer.valueOf(((JSONObject) obj).getString(key));
+        }
+        return null;
     }
 }

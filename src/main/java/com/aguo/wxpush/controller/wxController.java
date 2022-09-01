@@ -3,6 +3,7 @@ package com.aguo.wxpush.controller;
 
 import com.aguo.wxpush.constant.ConfigConstant;
 import com.aguo.wxpush.service.SendService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StringUtils;
@@ -33,7 +34,14 @@ public class wxController {
     @Scheduled(cron = "0 30 7 ? * *")
     @RequestMapping("/send")
     public String send() {
-        return sendService.sendWeChatMsg();
+        try {
+            return sendService.sendWeChatMsg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONObject json = new JSONObject();
+        json.put("msg", "信息推送失败");
+        return json.toJSONString();
     }
 
 

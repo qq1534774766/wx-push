@@ -37,7 +37,9 @@ public class SendServiceImpl implements SendService {
     private ConfigConstant configConstant;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String  getAccessToken() {
+    public String accessTokenq = "";
+
+    private String getAccessToken() {
         //这里直接写死就可以，不用改，用法可以去看api
         String grant_type = "client_credential";
         //封装请求数据
@@ -46,7 +48,7 @@ public class SendServiceImpl implements SendService {
         String sendGet = HttpUtil.sendGet("https://api.weixin.qq.com/cgi-bin/token", params);
         // 解析相应内容（转换成json对象）
         JSONObject jsonObject1 = JSONObject.parseObject(sendGet);
-//        logger.info("微信token响应结果=" + jsonObject1);
+        logger.info("微信token响应结果=" + jsonObject1);
         //拿到accesstoken
         return (String) jsonObject1.get("access_token");
     }
@@ -58,7 +60,7 @@ public class SendServiceImpl implements SendService {
      */
     @Override
     public String sendWeChatMsg() {
-        String accessToken = getAccessToken();
+        String accessToken = StringUtils.hasText(accessTokenq) ? accessTokenq : (accessTokenq = getAccessToken());
         List<JSONObject> errorList = new ArrayList();
         HashMap<String,Object> resultMap = new HashMap<>();
         //遍历用户的ID，保证每个用户都收到推送
@@ -216,7 +218,7 @@ public class SendServiceImpl implements SendService {
         if ("text".equals(resultMap.get("MsgType"))) {
             textMessage.setContent(resultMap.get("Content"));
         } else {
-            textMessage.setContent("目前仅支持文本呦");
+            textMessage.setContent(null);
         }
         return textMessage.getContent();
     }

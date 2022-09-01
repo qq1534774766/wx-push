@@ -87,6 +87,9 @@ public class ProverbServiceImpl implements ProverbService {
             JSONArray allProverb = JSONObject.parseArray((String) jsonObject.getJSONArray("result").getJSONObject(0).get("words"));
             //随机取出一条句子
             String s = (String) allProverb.get(new Random().nextInt(allProverb.size()));
+            while (s.length() > 30) {
+                s = (String) allProverb.get(new Random().nextInt(allProverb.size()));
+            }
             //去除无关元素
             proverb = s.replaceAll("^.*、", "");
         } catch (IOException e) {

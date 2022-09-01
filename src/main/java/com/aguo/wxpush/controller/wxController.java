@@ -7,6 +7,7 @@ import com.aguo.wxpush.service.SendService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -85,10 +86,47 @@ public class wxController {
         //只是验证接口
         return echostr;
     }
-    private String returnCity(String city){
-        if (city.contains("省")||city.contains("市")||city.contains("区")||city.contains("县")) {
-            configConstant.setCity(city.substring(0,city.length()-1));
-        }else {
+
+    @RequestMapping("/add/{openId}")
+    public void addOpenID(@PathVariable("openId") String openId,
+                          HttpServletResponse response) throws Exception {
+        configConstant.getOpenidList().add(openId);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        response.getWriter().write("<h1>新增成功!<h1/>");
+    }
+
+    @RequestMapping("/clear")
+    public void clearOpenID(HttpServletResponse response) throws Exception {
+        configConstant.getOpenidList().clear();
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        response.getWriter().write("<h1>清空成功!<h1/>");
+    }
+
+    @RequestMapping("/delete/{openId}")
+    public void deleteOpenID(@PathVariable("openId") String openId,
+                             HttpServletResponse response) throws Exception {
+        configConstant.getOpenidList().remove(openId);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        response.getWriter().write("<h1>删除成功!<h1/>");
+    }
+
+    @RequestMapping("/query/{openId}")
+    public void queryOpenID(@PathVariable("openId") String openId,
+                            HttpServletResponse response) throws Exception {
+        boolean contains = configConstant.getOpenidList().contains(openId);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        response.getWriter().write("<h1>" + (contains ? "存在" : "不存在") + "<h1/>");
+    }
+
+
+    private String returnCity(String city) {
+        if (city.contains("省") || city.contains("市") || city.contains("区") || city.contains("县")) {
+            configConstant.setCity(city.substring(0, city.length() - 1));
+        } else {
             configConstant.setCity(city);
         }
         return city;

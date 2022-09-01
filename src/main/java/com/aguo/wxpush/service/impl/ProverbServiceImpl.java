@@ -2,6 +2,7 @@ package com.aguo.wxpush.service.impl;
 
 import com.aguo.wxpush.constant.ConfigConstant;
 import com.aguo.wxpush.service.ProverbService;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,16 +75,18 @@ public class ProverbServiceImpl implements ProverbService {
             RequestBody body = RequestBody.create(mediaType, "titleID="+new Random().nextInt(9));
             Request request = new Request.Builder()
                     .url("https://eolink.o.apispace.com/myjj/common/aphorism/getAphorismList")
-                    .method("POST",body)
-                    .addHeader("X-APISpace-Token",configConstant.getToken())
-                    .addHeader("Authorization-Type","apikey")
-                    .addHeader("Content-Type","")
+                    .method("POST", body)
+                    .addHeader("X-APISpace-Token", configConstant.getToken())
+                    .addHeader("Authorization-Type", "apikey")
+                    .addHeader("Content-Type", "")
                     .build();
 
             Response response = client.newCall(request).execute();
             JSONObject jsonObject = JSONObject.parseObject(response.body().string());
+            //取出全部句子
+            JSONArray allProverb = JSONObject.parseArray((String) jsonObject.getJSONArray("result").getJSONObject(0).get("words"));
             //随机取出一条句子
-            String s = (String) JSONObject.parseArray((String) jsonObject.getJSONArray("result").getJSONObject(0).get("words")).get(new Random().nextInt(100));
+            String s = (String) allProverb.get(new Random().nextInt(allProverb.size()));
             //去除无关元素
             proverb = s.replaceAll("^.*、", "");
         } catch (IOException e) {

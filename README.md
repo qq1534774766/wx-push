@@ -59,7 +59,11 @@ Java版本
 
 ## 1.3 名言名句申请
 
-[点击注册](https://www.apispace.com/eolink/api/myjj/introduction)
+[点击注册](https://www.apispace.com/eolink/api/myjj/introduction)，可有可无，不申请推送效果如下（左边申请的，右边不申请）。
+
+![image-20220901201425210](https://i0.hdslb.com/bfs/album/10bf14bb5c141a68cbdb24f740fbb551a54699e8.png)
+
+
 
 ![image-20220825095959904](https://i0.hdslb.com/bfs/album/311a3f14f84876567603cbfc92cea3f01d6fd720.png)
 
@@ -91,12 +95,17 @@ Java版本
 
 - 看以下图片配置即可
 
+  - ApiSpace: token: 是名言名句，没有申请的话，略过即可。
+  
   ![ad8627f27c8601f06c828d43a233e8af74af444d](https://i0.hdslb.com/bfs/album/18c0a3ad2ada6ff81f8ab016b5797ab2191319f9.png)
+
+
 
 ## 2.3 使用
 
-- 打开浏览器访问：http://localhost:8081/send  即可收到公众号的推送信息
-- 修改城市：打开：http://localhost/  即可打开网页，输入新城市点击提交即可。
+1. 找到WxPushApplication，运行main方法即可。
+2. 打开浏览器访问：http://localhost:8081/send  即可收到公众号的推送信息
+3. 修改城市：打开：http://localhost:8081/  即可打开网页，输入新城市点击提交即可。
 
 ## 2.4 高级
 
@@ -145,5 +154,45 @@ Java版本
   http://1.0.0.0:8081/wx/send   推送
 
   http://1.0.0.0:8081/wx  修改天气城市
+
+## 2.5 2022年9月01日问题修复
+
+- 如果会用git的话，可以直接拉取最新代码即可。
+
+![image-20220901200626974](https://i0.hdslb.com/bfs/album/8cbfc2b9680b460fec02b99d4531fcd0f886ec74.png)
+
+- 如果不会用git，则建议重新克隆项目[2.1 克隆项目](##2.1 克隆项目)，application.yaml文件记得备份一份到桌面，以免被覆盖掉。
+
+**注意**：新的application.yaml，新增了一个属性
+
+![image-20220901202405807](https://i0.hdslb.com/bfs/album/173a658fce449d2f16aac6315b5f8cfe19832ab6.png)
+
+如果你想要名言名句，务必设置为**TRUE**
+
+以下是问题修复日志，给喜欢探究问题原因的伙伴食用。
+
+### 2.5.1 天气修复
+
+1. 从天气api获取到，未来的天气的日期是 01  02  03 的两位数的形式。
+2. Java中的LocalDate类提供的日期，是一位数的 1  2  3 的形式
+3. 因为一开始用是String字符串类型比较，所以01≠1，最后导致天气无法获取。
+
+### 2.5.2 名言警句修复
+
+- 获取的句子不正常
+  - 因为博主为了测试功能，使用的是免费的接口。
+  - 使用免费公开的api https://api.xygeng.cn/one ，其句子收集自各个平台，所以会出现**贬义**的意思。
+
+所以，现在已经修改为收费的apispace。这个你已经申请过了，就是[上面【1.3 名言名句申请】](##1.3 名言名句申请)
+
+### 2.5.3 名言警句可以手动开启
+
+- application.yaml文件中
+
+  ![image-20220901202235041](https://i0.hdslb.com/bfs/album/dfc5969d77eb0ad7f629775c0f0cbad992d79986.png)
+
+  enableDaily属性，可以配置是否开启每日一句。
+
+  **注意**：公众号的模板**无需**做出任何改变
 
 # 3.面向小白

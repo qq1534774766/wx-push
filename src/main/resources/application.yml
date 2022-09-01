@@ -23,6 +23,7 @@ weather:
     city: "广州"
 #注册并购买第二档次，有券，直接白嫖 https://www.apispace.com/eolink/api/myjj/introduction
 ApiSpace:
+  enableDaily: true #【新增功能】  true：开启每日一句，false：则不开启
   token: "5cc26sj7p4rosgf7ckb2wnusb1t21tl0"
 
 server:

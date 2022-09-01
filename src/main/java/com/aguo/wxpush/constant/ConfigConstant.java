@@ -37,15 +37,24 @@ public class ConfigConstant {
     @Value("${message.config.togetherDate}")
     public String togetherDate;
     @Value("${message.config.birthday1}")
-    public  String birthday1;
+    public String birthday1;
     @Value("${message.config.birthday2}")
-    public  String birthday2;
+    public String birthday2;
 
     @Value("${message.config.message}")
-    public  String message;
-
+    public String message;
+    @Value("${ApiSpace.enableDaily}")
+    private boolean enableDaily = true;
     @Value("${ApiSpace.token}")
     public String token;
+
+    public boolean isEnableDaily() {
+        return enableDaily;
+    }
+
+    public void setEnableDaily(boolean enableDaily) {
+        this.enableDaily = enableDaily;
+    }
 
     public String getToken() {
         return token;

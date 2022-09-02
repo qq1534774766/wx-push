@@ -166,8 +166,11 @@ public class SendServiceImpl implements SendService {
             sendMessage(accessToken, errorList, resultMap, opedId);
         }
         JSONObject result = new JSONObject();
+        if (errorList.size() > 0) {
+            result.put("result", "信息推送失败！");
+            result.put("errorData", errorList);
+        }
         result.put("result", "信息推送成功！");
-        result.put("errorData", errorList);
         logger.info("信息推送成功！");
         return result.toJSONString();
     }

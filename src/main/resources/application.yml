@@ -1,4 +1,5 @@
 #去申请 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+#下面是我个人的token，请伙伴们不要泄漏或为自己所用，会造成功能异常
 wx:
   config:
     appId: "wx71cd4b7e1d5d4925"

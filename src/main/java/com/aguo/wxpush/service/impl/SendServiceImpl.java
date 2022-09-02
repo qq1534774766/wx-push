@@ -59,8 +59,11 @@ public class SendServiceImpl implements SendService {
     @Override
     public String sendWeChatMsg() {
         String accessToken = getAccessToken();
+        if (!StringUtils.hasText(accessToken)) {
+            logger.error("token获取失败，请检查：公众号的，appId、appSecret");
+        }
         List<JSONObject> errorList = new ArrayList();
-        HashMap<String,Object> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         //遍历用户的ID，保证每个用户都收到推送
         for (String opedId : configConstant.getOpenidList()) {
 

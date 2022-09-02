@@ -61,6 +61,7 @@ public class SendServiceImpl implements SendService {
         String accessToken = getAccessToken();
         if (!StringUtils.hasText(accessToken)) {
             logger.error("token获取失败，请检查：公众号的，appId、appSecret");
+            return "token获取失败，请检查：公众号的，appId、appSecret";
         }
         List<JSONObject> errorList = new ArrayList();
         HashMap<String, Object> resultMap = new HashMap<>();
@@ -74,27 +75,34 @@ public class SendServiceImpl implements SendService {
             JSONObject first = JsonObjectUtil.packJsonObject(day, "#EED016");
             //今天的时间
             resultMap.put("first", first);
+            logger.info("first:{}", first);
             try {
                 //处理天气
                 JSONObject weatherResult = tianqiService.getWeatherByCity();
                 //城市
                 JSONObject city = JsonObjectUtil.packJsonObject(weatherResult.getString("city"),"#60AEF2");
-                resultMap.put("city",city);
+                resultMap.put("city", city);
+                logger.info("city:{}", city);
                 //天气
                 JSONObject weather = JsonObjectUtil.packJsonObject(weatherResult.getString("wea"),"#b28d0a");
-                resultMap.put("weather",weather);
+                resultMap.put("weather", weather);
+                logger.info("weather:{}", weather);
                 //最低气温
                 JSONObject minTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_night") + "°","#0ace3c");
-                resultMap.put("minTemperature",minTemperature);
+                resultMap.put("minTemperature", minTemperature);
+                logger.info("minTemperature:{}", minTemperature);
                 //最高气温
                 JSONObject maxTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_day") + "°","#dc1010");
-                resultMap.put("maxTemperature",maxTemperature);
+                resultMap.put("maxTemperature", maxTemperature);
+                logger.info("maxTemperature:{}", maxTemperature);
                 //风
                 JSONObject wind = JsonObjectUtil.packJsonObject(weatherResult.getString("win")+","+weatherResult.getString("win_speed"),"#6e6e6e");
-                resultMap.put("wind",wind);
+                resultMap.put("wind", wind);
+                logger.info("wind:{}", wind);
                 //湿度
                 JSONObject wet = JsonObjectUtil.packJsonObject(weatherResult.getString("humidity"),"#1f95c5");
-                resultMap.put("wet",wet);
+                resultMap.put("wet", wet);
+                logger.info("wet:{}", wet);
                 //未来三天天气
                 Map<String, String> map = tianqiService.getTheNextThreeDaysWeather();
                 JSONObject day1_wea = JsonObjectUtil.packJsonObject(map.get("今"), isContainsRain(map.get("今")));
@@ -102,7 +110,8 @@ public class SendServiceImpl implements SendService {
                 JSONObject day3_wea = JsonObjectUtil.packJsonObject(map.get("后"), isContainsRain(map.get("后")));
                 resultMap.put("day1_wea",day1_wea);
                 resultMap.put("day2_wea",day2_wea);
-                resultMap.put("day3_wea",day3_wea);
+                resultMap.put("day3_wea", day3_wea);
+                logger.info("day1_wea:{}、{}、{}", day1_wea, day2_wea, day3_wea);
             } catch (Exception e) {
                 e.printStackTrace();
                 HashMap<String, Object> map = new HashMap<>();
@@ -114,8 +123,12 @@ public class SendServiceImpl implements SendService {
 
             //生日
             try {
-                resultMap.put("birthDate1", getBirthday(configConstant.getBirthday1(), date));
-                resultMap.put("birthDate2", getBirthday(configConstant.getBirthday2(), date));
+                JSONObject birthDate1 = getBirthday(configConstant.getBirthday1(), date);
+                resultMap.put("birthDate1", birthDate1);
+                logger.info("birthDate1:{}", birthDate1);
+                JSONObject birthDate2 = getBirthday(configConstant.getBirthday2(), date);
+                resultMap.put("birthDate2", birthDate2);
+                logger.info("birthDate2:{}", birthDate2);
             } catch (Exception e) {
                 throw new RuntimeException("生日处理失败");
             }
@@ -123,6 +136,7 @@ public class SendServiceImpl implements SendService {
             //在一起时间
             try {
                 resultMap.put("togetherDate", togetherDay(date));
+                logger.info("togetherDate:{}", togetherDate);
             } catch (Exception e) {
                 throw new RuntimeException("在一起时间处理失败");
             }
@@ -134,6 +148,7 @@ public class SendServiceImpl implements SendService {
                     noteZh = proverbService.getOneNormalProverb();
                     JSONObject note_Zh = JsonObjectUtil.packJsonObject(noteZh, "#879191");
                     resultMap.put("note_Zh", note_Zh);
+                    logger.info("note_Zh:{}", note_Zh);
                 } catch (Exception e) {
                     logger.info("名言警句获取失败，检查ApiSpace的token是否正确？套餐是否过期？");
                 }
@@ -141,6 +156,7 @@ public class SendServiceImpl implements SendService {
                 try {
                     JSONObject note_En = JsonObjectUtil.packJsonObject(proverbService.translateToEnglish(noteZh), "#879191");
                     resultMap.put("note_En", note_En);
+                    logger.info("note_En:{}", note_En);
                 } catch (Exception e) {
                     logger.info("名言警句翻译失败，网易云翻译接口无法使用");
                 }

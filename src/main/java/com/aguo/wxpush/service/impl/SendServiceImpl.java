@@ -60,7 +60,7 @@ public class SendServiceImpl implements SendService {
      */
     @Override
     public String sendWeChatMsg() {
-        String accessToken = StringUtils.hasText(accessTokenq) ? accessTokenq : (accessTokenq = getAccessToken());
+        String accessToken = getAccessToken();
         List<JSONObject> errorList = new ArrayList();
         HashMap<String,Object> resultMap = new HashMap<>();
         //遍历用户的ID，保证每个用户都收到推送

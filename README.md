@@ -153,7 +153,7 @@ Java版本
     nohup java -jar wx.jar >wx.txt &
     ```
 
-    ![image-20220825114725051](https://i0.hdslb.com/bfs/album/b4b38a829cec57bce000ac737ff20a2222f190e3.png)
+    ![动画2](https://i0.hdslb.com/bfs/album/c9385c90faecda4e204cf5fee5f6bbb7ba0094bc.gif)
 
   - 放行端口
 
@@ -227,6 +227,12 @@ Java版本
 
 # 面向小白
 
+两种小白：1.外行小白。2.非Java出身的IT小白
+
+外行小白这部分只看：3.1~3.4就好。
+
+非Java出身的IT小白：全可看
+
 ## 3.1 安装Java环境
 
 Java环境就是运行这个应用的基本要求，电脑必须要安装和配置才能正确的运行Java程序。
@@ -271,6 +277,18 @@ Java环境就是运行这个应用的基本要求，电脑必须要安装和配�
 3. 修改城市：打开：http://localhost:8081/  即可打开网页，输入新城市点击提交即可。
 
    ![image-20220902103445431](https://i0.hdslb.com/bfs/album/0311ee56377bcf330a2fc024c7d8dff5c4601811.png)
+
+## 3.5 服务器自动推送
+
+- 上传到Linux云服务器
+
+![image-20220825114527103](https://i0.hdslb.com/bfs/album/dfca31d85e2c663be077f2dedb706c62668d4555.png)
+
+- 启动
+
+  ![动画2](https://i0.hdslb.com/bfs/album/c9385c90faecda4e204cf5fee5f6bbb7ba0094bc.gif)
+
+
 
 # 联系作者
 

@@ -237,7 +237,15 @@ Java版本
 
 Java环境就是运行这个应用的基本要求，电脑必须要安装和配置才能正确的运行Java程序。
 
-- 安装Java的教程网上特别多，这里推荐一篇博客，Java安装包我已提供，[点击打开安装教程](https://blog.csdn.net/wumingxiaozei/article/details/95628747)
+- 安装Java的教程网上特别多，这里推荐一篇博客，Java安装包我已提供，[点击打开CSDN安装Java教程](https://blog.csdn.net/wumingxiaozei/article/details/95628747)
+
+- Java安装包、wx.jar下载，提供阿里云：
+
+  > 「微信推送-小白版」，点击链接保存，或者复制本段内容，打开「阿里云盘」APP ，无需下载极速在线查看，视频原画倍速播放。 链接：https://www.aliyundrive.com/s/JFcZ2F7Lj5c
+
+![image-20220902110558803](https://i0.hdslb.com/bfs/album/89a48314970651f7d61d875cf6c6f3aa62e57d98.png)
+
+
 
 ## 3.2 配置wx.jar
 

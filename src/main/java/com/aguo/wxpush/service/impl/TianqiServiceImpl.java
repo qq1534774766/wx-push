@@ -29,13 +29,28 @@ public class TianqiServiceImpl implements TianqiService {
     private ConfigConstant configConstant;
     @Override
     public JSONObject getWeatherByCity() {
-        String TemperatureUrl = "https://www.yiketianqi.com/free/day" +
-                "?appid=" + configConstant.getWeatherAppId() +
-                "&appsecret=" + configConstant.getWeatherAppSecret()+
-                "&city=" + configConstant.getCity()+
-                "&unescape=1";
-        String sendGet = HttpUtil.sendGet(TemperatureUrl, null);
-        return JSONObject.parseObject(sendGet);
+        String result = null;
+        try {
+            OkHttpClient client = new OkHttpClient.Builder().build();
+            HttpUrl url = new HttpUrl.Builder()
+                    .scheme("https")
+                    .host("www.yiketianqi.com")
+                    .addPathSegments("free/day")
+                    .addQueryParameter("appid", configConstant.getWeatherAppId())
+                    .addQueryParameter("appsecret", configConstant.getWeatherAppSecret())
+                    .addQueryParameter("city", configConstant.getCity())
+                    .addQueryParameter("unescape", "1")
+                    .build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+            Response re = client.newCall(request).execute();
+            result = re.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return JSONObject.parseObject(result);
     }
     @Override
     public Map<String, String> getTheNextThreeDaysWeather() {

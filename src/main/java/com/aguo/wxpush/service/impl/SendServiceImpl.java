@@ -46,7 +46,7 @@ public class SendServiceImpl implements SendService {
         String sendGet = HttpUtil.sendGet("https://api.weixin.qq.com/cgi-bin/token", params);
         // 解析相应内容（转换成json对象）
         JSONObject jsonObject1 = JSONObject.parseObject(sendGet);
-//        logger.info("微信token响应结果=" + jsonObject1);
+        logger.info("微信token响应结果=" + jsonObject1);
         //拿到accesstoken
         return (String) jsonObject1.get("access_token");
     }

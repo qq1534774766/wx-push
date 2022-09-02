@@ -8,6 +8,8 @@ Java版本
 
 [3.面向小白](#3.面向小白)
 
+[4.联系作者](#4.联系作者)
+
 # 通用准备
 
 ## 1.1 申请微信公众号
@@ -218,3 +220,35 @@ Java版本
   **注意**：公众号的模板**无需**做出任何改变
 
 # 3.面向小白
+
+## 3.1 安装Java环境
+
+Java环境就是运行这个应用的基本要求，电脑必须要安装和配置才能正确的运行Java程序。
+
+- 安装Java的教程网上特别多，这里推荐一篇博客，Java安装包我已提供，[点击打开安装教程](https://blog.csdn.net/wumingxiaozei/article/details/95628747)
+
+## 3.2 配置wx.jar
+
+1. 右键选择文件，使用解压软件打开，不用解压
+
+2. 找到配置文件，wx.jar/BOOT-INF/classes，下的application.yml文件
+
+   ![image-20220902093420949](https://i0.hdslb.com/bfs/album/93da3bacb49f216a2cda01f0548dad9643d304a3.png)
+
+3. 双击，使用文本编辑器 (记事本)打开
+
+   ![image-20220902093543737](https://i0.hdslb.com/bfs/album/fbdf33f986bfcf1327bcece186e4aa7ba818c13e.png)
+
+4. 看以下图片配置即可
+
+   - ApiSpace: token: 是名言名句，没有申请的话，略过即可。
+
+   ![ad8627f27c8601f06c828d43a233e8af74af444d](https://i0.hdslb.com/bfs/album/18c0a3ad2ada6ff81f8ab016b5797ab2191319f9.png)
+
+5. 
+
+# 4.联系作者
+
+wx:Potato_Sgr
+
+qq:1534774766

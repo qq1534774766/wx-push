@@ -135,7 +135,8 @@ public class SendServiceImpl implements SendService {
 
             //在一起时间
             try {
-                resultMap.put("togetherDate", togetherDay(date));
+                JSONObject togetherDate = togetherDay(date);
+                resultMap.put("togetherDate", togetherDate);
                 logger.info("togetherDate:{}", togetherDate);
             } catch (Exception e) {
                 throw new RuntimeException("在一起时间处理失败");

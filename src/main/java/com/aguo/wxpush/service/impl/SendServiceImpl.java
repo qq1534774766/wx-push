@@ -169,9 +169,10 @@ public class SendServiceImpl implements SendService {
         if (errorList.size() > 0) {
             result.put("result", "信息推送失败！");
             result.put("errorData", errorList);
+        } else {
+            result.put("result", "信息推送成功！");
+            logger.info("信息推送成功！");
         }
-        result.put("result", "信息推送成功！");
-        logger.info("信息推送成功！");
         return result.toJSONString();
     }
 

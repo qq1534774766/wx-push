@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -80,7 +81,8 @@ public class TianqiServiceImpl implements TianqiService {
                 throw new RuntimeException("获取三天天气失败,检查配置文件");
             }
             logger.info(responseResult);
-            LocalDate now = LocalDate.now();
+            ZoneId zoneId = ZoneId.of("Asia/Shanghai");
+            LocalDate now = LocalDate.now(zoneId);
             //封装今天，明天，后天的时间
             /**
              * 原因分析：从天气api获取到未来的天气的日期是 01  02  03 的两位数。

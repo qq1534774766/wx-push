@@ -115,6 +115,8 @@ public class SendServiceImpl implements SendService {
                 resultMap.put("day2_wea", day2_wea);
                 resultMap.put("day3_wea", day3_wea);
                 logger.info("day1_wea:{}、{}、{}", day1_wea, day2_wea, day3_wea);
+                JSONObject message = JsonObjectUtil.packJsonObject(configConstant.getMessage(), "#000000");
+                resultMap.put("message", message);
             } catch (Exception e) {
                 e.printStackTrace();
                 HashMap<String, Object> map = new HashMap<>();

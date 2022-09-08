@@ -95,5 +95,32 @@ public class ProverbServiceImpl implements ProverbService {
         return proverb;
     }
 
+    @Override
+    public String getOneQingHua() {
+        String result = null;
+//        https://api.uomg.com/api/rand.qinghua?format=json
+        try {
+            HttpUrl url = new HttpUrl.Builder()
+                    .scheme("https")
+                    .host("api.uomg.com")
+                    .addPathSegments("api/rand.qinghua")
+                    .addQueryParameter("format", "json")
+                    .build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+            OkHttpClient cilent = new OkHttpClient.Builder().build();
+            Response response = cilent.newCall(request).execute();
+            JSONObject jsonObject = JSONObject.parseObject(response.body().string());
+            result = jsonObject.getString("content");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("土味情话获取失败");
+        }
+
+        return result;
+    }
+
 
 }

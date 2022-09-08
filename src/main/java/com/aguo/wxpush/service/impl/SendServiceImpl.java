@@ -146,25 +146,26 @@ public class SendServiceImpl implements SendService {
             } catch (Exception e) {
                 throw new RuntimeException("在一起时间处理失败");
             }
-            //名言警句，判断有没开启每日一句功能，application.yaml可以配置~
-            if (configConstant.isEnableDaily() && StringUtils.hasText(configConstant.getToken())) {
-                //名言警句,中文
+
+            //土味情话，判断有没开启每日一句功能，application.yaml可以配置~
+            if (configConstant.isEnableDaily()) {
+                //土味情话,中文
                 String noteZh = null;
                 try {
-                    noteZh = proverbService.getOneNormalProverb();
+                    noteZh = proverbService.getOneQingHua();
                     JSONObject note_Zh = JsonObjectUtil.packJsonObject(noteZh, "#879191");
                     resultMap.put("note_Zh", note_Zh);
                     logger.info("note_Zh:{}", note_Zh);
                 } catch (Exception e) {
-                    logger.info("名言警句获取失败，检查ApiSpace的token是否正确？套餐是否过期？");
+                    logger.info("土味情话获取失败，检查ApiSpace的token是否正确？套餐是否过期？");
                 }
-                //名言警句，英文
+                //土味情话，英文
                 try {
                     JSONObject note_En = JsonObjectUtil.packJsonObject(proverbService.translateToEnglish(noteZh), "#879191");
                     resultMap.put("note_En", note_En);
                     logger.info("note_En:{}", note_En);
                 } catch (Exception e) {
-                    logger.info("名言警句翻译失败，网易云翻译接口无法使用");
+                    logger.info("土味情话翻译失败，网易云翻译接口无法使用");
                 }
             }
             //封装数据并发送

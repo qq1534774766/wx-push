@@ -17,7 +17,15 @@ public interface ProverbService {
 
     /**
      * 得到正常的句子，需要注册申请。
+     *
      * @return
      */
     String getOneNormalProverb();
+
+    /**
+     * 获取一句情话
+     *
+     * @return
+     */
+    String getOneQingHua();
 }

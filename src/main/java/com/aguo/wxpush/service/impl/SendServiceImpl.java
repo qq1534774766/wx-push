@@ -96,20 +96,23 @@ public class SendServiceImpl implements SendService {
                 resultMap.put("maxTemperature", maxTemperature);
                 logger.info("maxTemperature:{}", maxTemperature);
                 //风
-                JSONObject wind = JsonObjectUtil.packJsonObject(weatherResult.getString("win")+","+weatherResult.getString("win_speed"),"#6e6e6e");
+                JSONObject wind = JsonObjectUtil.packJsonObject(weatherResult.getString("win") + "," + weatherResult.getString("win_speed"), "#6e6e6e");
                 resultMap.put("wind", wind);
                 logger.info("wind:{}", wind);
                 //湿度
-                JSONObject wet = JsonObjectUtil.packJsonObject(weatherResult.getString("humidity"),"#1f95c5");
+                JSONObject wet = JsonObjectUtil.packJsonObject(weatherResult.getString("humidity"), "#1f95c5");
                 resultMap.put("wet", wet);
                 logger.info("wet:{}", wet);
                 //未来三天天气
                 Map<String, String> map = tianqiService.getTheNextThreeDaysWeather();
+                if (map.isEmpty()) {
+                    logger.info("三天的天气获取失败");
+                }
                 JSONObject day1_wea = JsonObjectUtil.packJsonObject(map.get("今"), isContainsRain(map.get("今")));
                 JSONObject day2_wea = JsonObjectUtil.packJsonObject(map.get("明"), isContainsRain(map.get("明")));
                 JSONObject day3_wea = JsonObjectUtil.packJsonObject(map.get("后"), isContainsRain(map.get("后")));
-                resultMap.put("day1_wea",day1_wea);
-                resultMap.put("day2_wea",day2_wea);
+                resultMap.put("day1_wea", day1_wea);
+                resultMap.put("day2_wea", day2_wea);
                 resultMap.put("day3_wea", day3_wea);
                 logger.info("day1_wea:{}、{}、{}", day1_wea, day2_wea, day3_wea);
             } catch (Exception e) {

@@ -8,6 +8,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -27,6 +29,8 @@ import java.util.stream.Collectors;
 public class TianqiServiceImpl implements TianqiService {
     @Autowired
     private ConfigConstant configConstant;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public JSONObject getWeatherByCity() {
         String result = null;
@@ -61,9 +65,9 @@ public class TianqiServiceImpl implements TianqiService {
                     .scheme("https")
                     .host("yiketianqi.com")
                     .addPathSegments("free/week")
-                    .addQueryParameter("appid",configConstant.getWeatherAppId())
-                    .addQueryParameter("appsecret",configConstant.getWeatherAppSecret())
-                    .addQueryParameter("city",configConstant.getCity())
+                    .addQueryParameter("appid", configConstant.getWeatherAppId())
+                    .addQueryParameter("appsecret", configConstant.getWeatherAppSecret())
+                    .addQueryParameter("city", configConstant.getCity())
                     .build();
             Request request = new Request.Builder()
                     .url(url)
@@ -71,6 +75,11 @@ public class TianqiServiceImpl implements TianqiService {
                     .build();
             Response response = client.newCall(request).execute();
             String responseResult = response.body().string();
+            if (!StringUtils.hasText(responseResult)) {
+                logger.error("获取三天天气失败,检查配置文件");
+                throw new RuntimeException("获取三天天气失败,检查配置文件");
+            }
+            logger.info(responseResult);
             LocalDate now = LocalDate.now();
             //封装今天，明天，后天的时间
             /**
@@ -84,6 +93,10 @@ public class TianqiServiceImpl implements TianqiService {
             daySet.put(now.plusDays(2L).getDayOfMonth(), "后");
             //过滤，提取结果
             JSONObject jsonObject = JSONObject.parseObject(responseResult);
+            if (jsonObject.containsKey("errmsg")) {
+                logger.error(jsonObject.getString("errmsg"));
+                throw new IllegalArgumentException(jsonObject.getString("errmsg"));
+            }
             map = jsonObject.getJSONArray("data").stream()
                     .peek(o -> {
                         String date = getStringFromJson(o, "date").substring(8);

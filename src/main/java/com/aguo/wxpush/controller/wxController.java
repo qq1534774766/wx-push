@@ -1,11 +1,11 @@
 package com.aguo.wxpush.controller;
 
 
-import com.aguo.wxpush.Task;
 import com.aguo.wxpush.constant.ConfigConstant;
 import com.aguo.wxpush.service.SendService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +28,8 @@ public class wxController {
     private SendService sendService;
 
 
-    @Autowired
-    private Task task;
+//    @Autowired
+//    private Task task;
 
     /**
      * 获取Token
@@ -37,7 +37,7 @@ public class wxController {
      *
      * @return
      */
-//    @Scheduled(cron = "0 30 7 ? * *")
+    @Scheduled(cron = "0 0 9 ? * *")
     @RequestMapping("/send")
     public String send() {
         try {
@@ -59,7 +59,7 @@ public class wxController {
         returnCity(city);
         writer.write("<h1>更新城市成功!<h1/>");
         if (StringUtils.hasText(hour) && StringUtils.hasText(minute)) {
-            task.changeTask(Integer.parseInt(hour), Integer.parseInt(minute));
+//            task.changeTask(Integer.parseInt(hour), Integer.parseInt(minute));
             writer.write("<h1>更新时间成功!<h1/>");
         }
         response.setContentType("text/html");
@@ -75,7 +75,7 @@ public class wxController {
                 if (Pattern.matches("^\\d+[:|：|.|。]\\d+$", s)) {
                     //输入的是时间
                     String[] time = s.split("[:|：|.|。]");
-                    task.changeTask(Integer.parseInt(time[0]), Integer.parseInt(time[1]));
+//                    task.changeTask(Integer.parseInt(time[0]), Integer.parseInt(time[1]));
                 } else {
                     //输入的是城市
                     returnCity(s);

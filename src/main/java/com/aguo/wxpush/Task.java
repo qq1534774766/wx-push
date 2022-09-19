@@ -26,7 +26,7 @@ public class Task {
 
     {
         //每天自动推送的时间
-        runTask(8, 30);
+//        runTask(8, 30);
     }
 
     public static void main(String[] args) {

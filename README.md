@@ -8,6 +8,7 @@ Java版本
 QQ群：
 
 ![image-20220914164151679](https://i0.hdslb.com/bfs/album/7680c403a1c05bb16e277e90e9f7a0985c3f3c58.png)
+
 作者联系方式：
 
 ~~wx:Potato_Sgr~~
@@ -24,6 +25,8 @@ QQ群：
 [3.面向小白](#面向小白)
 
 [4.联系作者](#联系作者)
+
+[5.常见问题](#常见问题)
 
 # 通用准备
 
@@ -286,6 +289,12 @@ Java环境就是运行这个应用的基本要求，电脑必须要安装和配�
 
    ![image-20220902093859624](https://i0.hdslb.com/bfs/album/a30c00f0267eed92e3d19343b3a6b275a30b441a.png)
 
+6. 配置自动推送的时间
+
+   默认是7.30，没有代码编辑器无法修改，可以联系作者修改，有空就改
+
+
+
 ## 3.3 运行wx.jar
 
 ![动画1](https://i0.hdslb.com/bfs/album/de2b199ed21eebceb6672a4b15a10a6bf0c1321d.gif)
@@ -333,3 +342,16 @@ Java环境就是运行这个应用的基本要求，电脑必须要安装和配�
 wx:Potato_Sgr
 
 qq:1534774766
+
+# 常见问题
+
+提问问题前，看看这里。
+
+1. 项目无法启动，启动报错
+   - 检查电脑java环境安装是否成功？win+r 输入cmd 回车，输入命令 java -version ，有显示版本信息才表示正常。
+   - 其余都是idea问题，强烈建议在idea通过new project的方式，然后输入GitHub上的项目地址链接进行克隆。
+2. 找不到配置文件？
+   - 教程中的图片是有目录信息的，src/main/recourse/application.yml中
+   - 找不到WxpushApplication.java，也是仔细看教程的图，是有路径信息的。
+3. 获取token失败？
+   - 如果你只动了配置文件，没有改代码，100%是你appid和secretid配置错了，不要觉得自己没错，自己检查每一个字母再来质疑。

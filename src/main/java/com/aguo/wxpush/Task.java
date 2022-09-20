@@ -2,7 +2,6 @@ package com.aguo.wxpush;
 
 import com.aguo.wxpush.service.SendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime: 2022/9/1 21:36
  * @Description: TODO
  */
-@Component
+//@Component
 public class Task {
     private static Timer TASK = new Timer();
     @Autowired

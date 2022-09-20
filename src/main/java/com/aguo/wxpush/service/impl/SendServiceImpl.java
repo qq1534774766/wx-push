@@ -148,7 +148,7 @@ public class SendServiceImpl implements SendService {
             sendMessage(accessToken, errorList, resultMap, opedId);
         }
         JSONObject result = new JSONObject();
-        result.put("result", "信息推送成功！");
+        result.put("result", "信息推送成功~");
         result.put("errorData", errorList);
         logger.info("信息推送成功！");
         return result.toJSONString();
@@ -205,6 +205,7 @@ public class SendServiceImpl implements SendService {
         return s.contains("雨")?"#1f95c5":"#b28d0a";
     }
 
+    @Override
     public String messageHandle(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("utf-8");
         Map<String, String> resultMap = MessageUtil.parseXml(request);

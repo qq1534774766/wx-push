@@ -1,4 +1,4 @@
-Java版本
+Java版本，教程最近一次更新时间为：2022-10-27
 # CSDN是旧版，请参考下面的最新教程。包含小白教程
 
 ## CSDN不能放联系方式，我就放置顶这里了
@@ -100,12 +100,22 @@ QQ群：
 
 - 打开Idea
 
+  ps：idea是一款适合Java开发的一款编辑器软件，如有需要可以自行百度安装并完成破解。
+
+  ​	参考链接：[IntelliJ IDEA 2022.2.3最新激活破解教程（永久激活，亲测有效） - 异常教程 (exception.site)](https://www.exception.site/essay/how-to-free-use-intellij-idea-2019-3)
+
   ![image-20220825111147034](https://i0.hdslb.com/bfs/album/e35c4a638aa22fa49fcfcf761cda3d539e9c93e4.png)
 
-- 克隆
+- 克隆我的GitHub项目。
 
+  找到idea的左上角new一个项目。
+
+  ![image-20221027004950055](https://i0.hdslb.com/bfs/album/18dd7307e659006d96026ee61e6dfd4e57f02f5a.png)
+  
   地址：https://github.com/qq1534774766/wx-push.git
-
+  
+  Directory你随意，只是项目存放地址。
+  
   ![image-20220825111225911](https://i0.hdslb.com/bfs/album/139e2c9a7370c2c9d5c1517f17ae9a67302b09b3.png)
 
 ## 2.2 配置文件
@@ -115,6 +125,7 @@ QQ群：
 - 看以下图片配置即可
 
   - ApiSpace: token: 是名言名句，没有申请的话，略过即可。
+  - **注意：**city，不可能添加省市区字符，如广东省广州市海珠区，只能写成**海珠**
   
   ![ad8627f27c8601f06c828d43a233e8af74af444d](https://i0.hdslb.com/bfs/album/18c0a3ad2ada6ff81f8ab016b5797ab2191319f9.png)
 
@@ -123,6 +134,12 @@ QQ群：
 ## 2.3 使用
 
 1. 找到WxPushApplication，运行main方法即可。
+
+   ![image-20221027005250382](https://i0.hdslb.com/bfs/album/1cb869ef747e2c5368e5ac83ae60c64f524dafec.png)
+
+   如提示图示，表示运行成功：
+
+   ![image-20221027005422431](https://i0.hdslb.com/bfs/album/006b926e0706706f24ff0cfe7df9d097a36bf5a7.png)
 
 2. 打开浏览器访问：http://localhost:8081/send  即可收到公众号的推送信息
 
@@ -162,22 +179,34 @@ QQ群：
 
   - 上传
 
-    ![image-20220825114527103](https://i0.hdslb.com/bfs/album/dfca31d85e2c663be077f2dedb706c62668d4555.png)
+    这里我使用的是MobaXterm终端管理软件。
+
+    下载链接：https://download.mobatek.net/2212022060563542/MobaXterm_Installer_v22.1.zip
+
+    下载完解压后安装即可。（安装可能会遇到提示3503等错误无法安装，那是因为安装程序的权限不够，选中安装包选择以管理员身份运行即可。）
+  
+    上次步骤如图：
+
+    1. ![image-20221027010632537](https://i0.hdslb.com/bfs/album/53b749e9641594d7dc87c86f502d187c2af6b2f5.png)
+    2. ![image-20221027010719886](https://i0.hdslb.com/bfs/album/903e2201d01aabc4c64c4be659b73b09ef803bad.png)
+    3. ![image-20220825114527103](https://i0.hdslb.com/bfs/album/dfca31d85e2c663be077f2dedb706c62668d4555.png)
 
     然后运行指令：
 
     ```bash
     nohup java -jar wx.jar >wx.txt &
     ```
-
+  
+    这里输入命令一路回车即可，没有什么特别的提示。
+  
     ![动画2](https://i0.hdslb.com/bfs/album/c9385c90faecda4e204cf5fee5f6bbb7ba0094bc.gif)
-
+  
   - 放行端口
-
+  
     因为默认是8081的端口，**务必**要开放服务器的防火墙！！！！
-
+  
     下面是阿里云的示例
-
+  
     - ![image-20220901205911423](https://i0.hdslb.com/bfs/album/0c64b00474c62baadd4d3bb7c615a11e62768975.png)
   
     
@@ -198,9 +227,9 @@ QQ群：
   
   **正常：**
   
-  http://1.0.0.0:8081/send   推送
+  http://公网IP:8081/send   推送
   
-  http://1.0.0.0:8081/  修改天气城市
+  http://公网IP:8081/  修改天气城市
 
 ## 2.5 2022年9月01日问题修复
 

@@ -36,6 +36,8 @@ QQ群：
 
 ## 1.1 申请微信公众号
 
+鼠标链接然后右键，选择在“新标签打开”，这样就不会把当前页跳转走。
+
 [点击跳转申请](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
 
 - 得到这个页面：

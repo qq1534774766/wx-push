@@ -1,4 +1,7 @@
-Java版本，教程最近一次更新时间为：2022-10-27
+Java版本，教程最近一次更新时间为：
+
+### 2022-11-08
+
 # CSDN是旧版，请参考下面的最新教程。包含小白教程
 
 ## CSDN不能放联系方式，我就放置顶这里了
@@ -29,6 +32,8 @@ QQ群：
 
 # 通用准备
 
+> 通用准备，不管是什么小白还是开发者，都是必须经过的一步！
+
 ## 1.1 申请微信公众号
 
 [点击跳转申请](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
@@ -37,12 +42,18 @@ QQ群：
 
 ![image-20220825095034745](https://i0.hdslb.com/bfs/album/283615dd5ef3d5d83936b61f08bf1bd8277a3393.png)
 
-- 滑到下面，**扫码**关注公众号
+- 滑到下面看到这图，使用手机，**扫码**关注公众号
 
   ![image-20220825095130874](https://i0.hdslb.com/bfs/album/8c11064fda79d3a563bb4358c04a3e0627d0e9ac.png)
 
-- 新增模板,【中文】的可以改，{{xxx.DATA}}不能改，但可以移动位置。
+- 新增模板
 
+  > 中文文字的可以随意更改，{{xxx.DATA}}不能改，但可以移动位置。
+  >
+  > 另外说说原理：{{xx.DATA}}是一个占位置的符号，内容不是固定的，需要服务器提供数据来进行填充数据。
+  >
+  > 注意：模板的中午最好只使用字符图形，如♥、△等，不要使用表情如😊🤣😚🤗的表情，否则会出现颜色显示错误！
+  
   ```te
   {{first.DATA}}
   
@@ -63,9 +74,9 @@ QQ群：
   
   {{note_Zh.DATA}}
   ```
-
+  
   ![image-20220825112223388](https://i0.hdslb.com/bfs/album/5645048e9396ff8c2b981e05bf12a06ae60bad0e.png)
-
+  
   ![image-20220825112250898](https://i0.hdslb.com/bfs/album/541e1dfdf5577cba964f9d78c1ce28ed62fc3c45.png)
 
 ## 1.2 申请天气接口
@@ -96,13 +107,13 @@ QQ群：
 
 # 面向开发者
 
+> 作为开发者，肯定有属于自己一款的代码编辑器把，没有的话可以下载，这里使用的是IDEA代码编辑器。
+
+[IDEA安装与PJ教程在这里，点击打开](https://www.exception.site/essay/how-to-free-use-intellij-idea-2019-3)
+
 ## 2.1 克隆项目
 
 - 打开Idea
-
-  ps：idea是一款适合Java开发的一款编辑器软件，如有需要可以自行百度安装并完成破解。
-
-  ​	参考链接：[IntelliJ IDEA 2022.2.3最新激活破解教程（永久激活，亲测有效） - 异常教程 (exception.site)](https://www.exception.site/essay/how-to-free-use-intellij-idea-2019-3)
 
   ![image-20220825111147034](https://i0.hdslb.com/bfs/album/e35c4a638aa22fa49fcfcf761cda3d539e9c93e4.png)
 
@@ -118,6 +129,10 @@ QQ群：
   
   ![image-20220825111225911](https://i0.hdslb.com/bfs/album/139e2c9a7370c2c9d5c1517f17ae9a67302b09b3.png)
 
+- 注意：GitHub是国外的地址，所以可能会出现克隆失败的情况出现，失败了就重新克隆即可。
+
+  另外，这里提供github加速器，可以提高克隆的成功率，[点击打开下载](https://objects.githubusercontent.com/github-production-release-asset-2e65be/375939072/637edf98-6d5a-4df4-922b-359f9f5f72f1?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20221108%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221108T123001Z&X-Amz-Expires=300&X-Amz-Signature=9dce24a578d57855e22941d41ca24ee614ab26cb9c7b42db7fea03cbdc6e1436&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=375939072&response-content-disposition=attachment%3B%20filename%3Dfastgithub_win-x64.zip&response-content-type=application%2Foctet-stream)
+
 ## 2.2 配置文件
 
 ![image-20220825111704640](https://i0.hdslb.com/bfs/album/40ae4dbfa1a0d52b95c75eaf7ab8814f15fbb107.png)
@@ -125,13 +140,18 @@ QQ群：
 - 看以下图片配置即可
 
   - ApiSpace: token: 是名言名句，没有申请的话，略过即可。
+  
+  - 配置文件写完之后，**强烈建议**把所有的中午注释通通删除掉！
+  
+    ![image-20221108203244582](https://i0.hdslb.com/bfs/album/aa98b9f99550c4b0694a95cf3a3bf86e9e25707d.png)
+  
   - **注意：**city，不可能添加省市区字符，如广东省广州市海珠区，只能写成**海珠**
   
   ![ad8627f27c8601f06c828d43a233e8af74af444d](https://i0.hdslb.com/bfs/album/18c0a3ad2ada6ff81f8ab016b5797ab2191319f9.png)
 
 
 
-## 2.3 使用
+## 2.3 运行应用
 
 1. 找到WxPushApplication，运行main方法即可。
 
@@ -149,13 +169,54 @@ QQ群：
 
    ![image-20220902103445431](https://i0.hdslb.com/bfs/album/0311ee56377bcf330a2fc024c7d8dff5c4601811.png)
 
-## 2.4 高级
+### 2.3.1 启动失败原因汇总
+
+1. ![image-20221108203517709](https://i0.hdslb.com/bfs/album/13049c912f9b856c31b7b1ec33e2f862163933d5.png)
+
+   这种错误，就是配置文件的格式错误！！配置文件在 2.2.
+
+   配置文件格式要求：
+
+   - 每一个冒号之后一定要有一个空格
+
+     ![image-20221108203700952](https://i0.hdslb.com/bfs/album/e1322c7ac367f62d64d66c9dd69c6bab001bb33b.png)
+
+   - 双引号要成对
+
+     ![image-20221108203843510](https://i0.hdslb.com/bfs/album/6e607535d75160f04284763ffcf92d8a148c0210.png)
+
+2. ![image-20221108204732901](https://i0.hdslb.com/bfs/album/74924401e77287e308099e744fa01f9a6d59c015.png)
+
+   翻译过来就是，端口8081已经被占用了。
+
+   解决办法选其一即可：
+
+   - 找到占用8081的应用，把他关掉，不会找/找不到下一个。
+   - 重启电脑/服务器
+   - 修改配置文件，找到2.2，把port: 8081改为8082什么的都行。
+
+3. ![image-20221108205105192](https://i0.hdslb.com/bfs/album/f55b6add6b08d460aaf123ddb73e654b1817834f.png)
+
+   这是因为maven导包失败
+
+   办法：
+
+   - 刷新maven
+
+     ![image-20221108205414468](https://i0.hdslb.com/bfs/album/91565178fb25713815f9659e9056df36f50c6913.png)
+
+   - 可能你没有按照我的方法来克隆项目，把项目从磁盘中彻底删除，重新克隆。看到2.1。
+
+## 2.4 高级篇
 
 ### 2.4.1 本地自动推送
 
-- 那就是让自己运行项目的电脑不关机即可~
+- 那就是让自己运行项目的电脑不关机即可，**不能关机！**虚拟机也不能关，别问关机后能不能推送，闹钟没装电池到点了能响起来吗？
 
-- 默认是每天早上7:30推送，可以自己修改
+- 默认是每天早上7:30推送，可以自己修改。
+  - 修改的地方如图所示，这个时间是运行该应用的电脑时间！
+  - 如果在国外的电脑运行本项目，是以国外运行本项目的电脑时间为准
+
 
 ![image-20220825113234321](https://i0.hdslb.com/bfs/album/0913a49e509856ed4c6364a85cd9d75ff74014fc.png)
 
@@ -163,7 +224,41 @@ QQ群：
 
 - 如果你有云服务器，就能实现24h自动推送啦
 
-- 简单讲解，
+#### 2.4.2.1 云服务环境搭建
+
+1. 购买服务器，这个渠道很多的，阿里云、腾讯云、百度云，都有，这个种类很多，买最便宜的就行，新用户一般99/年。
+
+2. 服务器配置的话，centos7都行，其他磁盘，网络随便。
+
+3. 找到服务器的公网IP。
+
+4. 使用远程链接工具，我这里使用的是mobaxterm，
+
+   下载链接：https://download.mobatek.net/2212022060563542/MobaXterm_Installer_v22.1.zip
+
+   下载完解压后安装即可。（安装可能会遇到提示3503等错误无法安装，那是因为安装程序的权限不够，选中安装包选择以管理员身份运行即可。）
+
+5. 连接服务器，
+
+   ![image-20221027010632537](https://i0.hdslb.com/bfs/album/53b749e9641594d7dc87c86f502d187c2af6b2f5.png)
+
+6. ![image-20221027010719886](https://i0.hdslb.com/bfs/album/903e2201d01aabc4c64c4be659b73b09ef803bad.png)
+
+7. 看到右边黑黑的窗口就是服务器的控制台了。
+
+8. 输入命令 java -version 并回车
+
+   ![image-20221108210356876](https://i0.hdslb.com/bfs/album/2420148b0f737e9a9375113b00ca58dbe88a192e.png)
+
+   看到这些信息表示jdk环境正常。
+
+   但是如果显示的openjdk，**务必卸载**！！重新安装OracleJDK。
+
+   [Linux卸载自带的openJdk，并且安装JDK1.8_codesWang的博客-CSDN博客](https://blog.csdn.net/qazzwx/article/details/94725938)
+
+#### 2.4.2.2 运行
+
+- 简单讲解下，
 
   - 打包
 
@@ -184,7 +279,7 @@ QQ群：
     下载链接：https://download.mobatek.net/2212022060563542/MobaXterm_Installer_v22.1.zip
 
     下载完解压后安装即可。（安装可能会遇到提示3503等错误无法安装，那是因为安装程序的权限不够，选中安装包选择以管理员身份运行即可。）
-  
+
     上次步骤如图：
 
     1. ![image-20221027010632537](https://i0.hdslb.com/bfs/album/53b749e9641594d7dc87c86f502d187c2af6b2f5.png)
@@ -196,40 +291,46 @@ QQ群：
     ```bash
     nohup java -jar wx.jar >wx.txt &
     ```
-  
+
     这里输入命令一路回车即可，没有什么特别的提示。
-  
+
+    就是一路回车，没有反馈信息的，**别老过来问，回车就行了吗？**
+
+    然后这个终端就能断了。
+
     ![动画2](https://i0.hdslb.com/bfs/album/c9385c90faecda4e204cf5fee5f6bbb7ba0094bc.gif)
-  
+
   - 放行端口
-  
-    因为默认是8081的端口，**务必**要开放服务器的防火墙！！！！
-  
+
+    因为默认是8081的端口（如果你修改了配置文件的端口，那就改为你配置文件的端口），**务必**要开放服务器的防火墙！！！！
+
     下面是阿里云的示例
-  
+
     - ![image-20220901205911423](https://i0.hdslb.com/bfs/album/0c64b00474c62baadd4d3bb7c615a11e62768975.png)
-  
+
     
-  
+
     
-  
+
     - ![image-20220901205842009](https://i0.hdslb.com/bfs/album/95fa6d131081759f8950c16e46476857751350db.png)
-  
+
     
-  
+
   测试：1.0.0.0是你的服务器ip地址
-  
+
   **作废：**因为公共路径wx并没用配置，所以会导致404
-  
+
   ~~http://1.0.0.0:8081/wx/send   推送~~
-  
+
   ~~http://1.0.0.0:8081/wx  修改天气城市~~
-  
+
   **正常：**
-  
+
   http://公网IP:8081/send   推送
-  
+
   http://公网IP:8081/  修改天气城市
+
+  （如果你修改了配置文件的端口，那就改为你配置文件的端口）
 
 ## 2.5 2022年9月01日问题修复
 
@@ -340,6 +441,8 @@ Java环境就是运行这个应用的基本要求，电脑必须要安装和配�
 
 ## 3.5 服务器自动推送
 
+先参考2.4.2
+
 - 上传到Linux云服务器
 
 ![image-20220825114527103](https://i0.hdslb.com/bfs/album/dfca31d85e2c663be077f2dedb706c62668d4555.png)
@@ -365,11 +468,17 @@ Java环境就是运行这个应用的基本要求，电脑必须要安装和配�
 - 自己的电脑不关机，充当服务器，默认每天早上7.30自动推送，可以修改时间的，看 2.4.1本地自动推送。
 - 云服务，这个需要购买服务器才行，建议有Linux基础的人动起手来。
 
+## 4.3 使用自己公众号/修改名称
+
+名称无法修改，但可以使用自己的公众号，作者没用过。
+
+但是找到1.1的管理页面，找到其id和secretid替换就行。
+
+## 4.4 其他问题见qq群公众号
+
 # 联系作者
 
-wx:Potato_Sgr
-
-qq:1534774766
+作者忙碌，去qq群提问吧
 
 # 常见问题
 
@@ -382,4 +491,4 @@ qq:1534774766
    - 教程中的图片是有目录信息的，src/main/recourse/application.yml中
    - 找不到WxpushApplication.java，也是仔细看教程的图，是有路径信息的。
 3. 获取token失败？
-   - 如果你只动了配置文件，没有改代码，100%是你appid和secretid配置错了，不要觉得自己没错，自己检查每一个字母再来质疑。
+   - 如果你只动了配置文件，没有改代码，100%是你appid和secretid配置错了，刷新页面重新复制粘贴，不要觉得自己没错，自己检查每一个字母再来质疑。

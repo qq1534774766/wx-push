@@ -210,11 +210,11 @@ public class SendServiceImpl implements SendService {
         return togetherDateObj;
     }
 
-    private JSONObject getBirthday(String configConstant, String date) {
+    private JSONObject getBirthday(String birthday, String date) {
         String birthDay = "无法识别";
         try {
             Calendar calendar = Calendar.getInstance();
-            String newD = calendar.get(Calendar.YEAR) + "-" + configConstant;
+            String newD = calendar.get(Calendar.YEAR) + "-" + birthday;
             birthDay = DateUtil.daysBetween(date, newD);
             if (Integer.parseInt(birthDay) < 0) {
                 Integer newBirthDay = Integer.parseInt(birthDay) + 365;

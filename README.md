@@ -1,6 +1,8 @@
 Java版本，教程最近一次更新时间为：
 
-### 2022-11-08
+## 重大更新：谚语功能修复。务必更新新的模块以及配置文件中的模板ＩＤ
+
+### 2023-08-2
 
 # CSDN是旧版，请参考下面的最新教程。包含小白教程
 
@@ -57,24 +59,24 @@ QQ群：
   > 注意：模板的中午最好只使用字符图形，如♥、△等，不要使用表情如😊🤣😚🤗的表情，否则会出现颜色显示错误！
   
   ```te
-  {{first.DATA}}
+  　{{first.DATA}}
   
-  城市：{{city.DATA}}
+  　城市：{{city.DATA}}
   
-  实况天气：{{weather.DATA}}
-  气温：{{minTemperature.DATA}} ~ {{maxTemperature.DATA}}
-  风速：{{wind.DATA}}
-  湿度：{{wet.DATA}}
-  今天~后天：{{day1_wea.DATA}},{{day2_wea.DATA}},{{day3_wea.DATA}}
+  　实况天气：{{weather.DATA}}
+  　气温：{{minTemperature.DATA}} ~ {{maxTemperature.DATA}}
+  　风速：{{wind.DATA}}
+  　湿度：{{wet.DATA}}
+  　今天~后天：{{day1_wea.DATA}},{{day2_wea.DATA}},{{day3_wea.DATA}}
   
-  ♥在一起♥: {{togetherDate.DATA}}
+  　♥在一起♥: {{togetherDate.DATA}}
   
-  距离kk生日：{{birthDate1.DATA}}
-  距离gg生日：{{birthDate2.DATA}}
+  　距离kk生日：{{birthDate1.DATA}}
+  　距离gg生日：{{birthDate2.DATA}}
   
-  {{note_En.DATA}}
+  　{{note_En.DATA}}
   
-  {{note_Zh.DATA}}
+  　{{note_Zh.DATA}}
   ```
   
   ![image-20220825112223388](https://i0.hdslb.com/bfs/album/5645048e9396ff8c2b981e05bf12a06ae60bad0e.png)

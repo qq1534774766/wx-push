@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * @Author: wenqiaogang
  * @DateTime: 2022/8/23 12:55
- * @Description: TODO
+ * @Description: 获取城市的天气并处理，逻辑复杂，小心修改。
  */
 @Service
 public class TianqiServiceImpl implements TianqiService {
@@ -116,12 +116,14 @@ public class TianqiServiceImpl implements TianqiService {
     }
 
     @Override
+    @Deprecated
     public JSONObject getWeatherByIP() {
         String TemperatureUrl = "https://www.yiketianqi.com/free/day?appid=" + configConstant.getWeatherAppId() + "&appsecret=" + configConstant.getWeatherAppSecret() + "&unescape=1";
         String sendGet = HttpUtil.sendGet(TemperatureUrl, null);
         return JSONObject.parseObject(sendGet);
     }
 
+    @Deprecated
     private String hasTextOrDefault(String s) {
         return StringUtils.hasText(s) ? s : "无法识别";
     }

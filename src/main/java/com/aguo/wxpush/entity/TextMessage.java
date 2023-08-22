@@ -5,7 +5,7 @@ package com.aguo.wxpush.entity;
  * @Description:
  * @Author: lst
  * @Date 2020-08-19
- * 1、文本消息
+ * 1、文本消息实体，这是用户给公众号发消息，然后微信后台给服务器响应的数据实体结构
  * <xml>
  *   <ToUserName>oANl56cC7d7JP88la43243WaA</ToUserName>
  *   <FromUserName>gh_a1821534134</FromUserName>

@@ -45,7 +45,14 @@ public class wxController {
     }
 
 
-
+    /**
+     * 这个方法是用于浏览器打开，http://localhost:8081/，修改城市时候调用的接口
+     *
+     * @param city     城市，不允许包含“省”，“市”，”区“等字。广州就写广州，天河就天河，不要加”市“，而错写成广州市
+     * @param time     保留字段，暂时无用
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/changeConfig")
     public void changeConfig(String city,String time, HttpServletResponse response) throws IOException {
         returnCity(city);
@@ -54,6 +61,16 @@ public class wxController {
         response.getWriter().write("<h1>更新成功!<h1/>");
         sendService.sendWeChatMsg();
     }
+
+    /**
+     * 这是配置微信公众号能回复。
+     * 即给公众号发送城市，即能修改天气所对应的城市，这个需要去公众号后台配置，并且需要域名和服务器，比较麻烦。
+     * 教程没给，想折腾的先搞到域名和服务器再说
+     * @param echostr
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/receiveMsg")
     public String receiveMsg(@RequestParam(required = false) String echostr,
                              HttpServletRequest request,
@@ -67,6 +84,12 @@ public class wxController {
         //只是验证接口
         return echostr;
     }
+
+    /**
+     * 城市字段安全处理，因为有些人可能会忘记配置的时候是不能加“市”这个字的，故写下该方法来剔除后面的字。
+     * @param city
+     * @return
+     */
     private String returnCity(String city){
         if (city.contains("省")||city.contains("市")||city.contains("区")||city.contains("县")) {
             configConstant.setCity(city.substring(0,city.length()-1));

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * @Author: wenqiaogang
  * @DateTime: 2022/8/23 12:51
- * @Description: TODO
+ * @Description: 常量类，数据来自于application.yml的配置，在代码中使用
  */
 @Component
 @ConfigurationProperties(prefix = "wx.config")
@@ -34,6 +34,8 @@ public class ConfigConstant {
     public String weatherAppSecret;
     @Value("${weather.config.city}")
     public String city;
+    @Value("${message.config.lunarSwitch}")
+    public Boolean lunarSwitch;
     @Value("${message.config.togetherDate}")
     public String togetherDate;
     @Value("${message.config.birthday1}")
@@ -47,22 +49,6 @@ public class ConfigConstant {
     private boolean enableDaily = true;
     @Value("${ApiSpace.token}")
     public String token;
-
-    public boolean isEnableDaily() {
-        return enableDaily;
-    }
-
-    public void setEnableDaily(boolean enableDaily) {
-        this.enableDaily = enableDaily;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public void setAppId(String appId) {
         this.appId = appId;
@@ -84,6 +70,13 @@ public class ConfigConstant {
         this.templateId = templateId;
     }
 
+    public ArrayList<String> getOpenidList() {
+        return openidList;
+    }
+
+    public void setOpenidList(ArrayList<String> openidList) {
+        this.openidList = openidList;
+    }
 
     public String getWeatherAppId() {
         return weatherAppId;
@@ -107,6 +100,14 @@ public class ConfigConstant {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Boolean getLunarSwitch() {
+        return lunarSwitch;
+    }
+
+    public void setLunarSwitch(Boolean lunarSwitch) {
+        this.lunarSwitch = lunarSwitch;
     }
 
     public String getTogetherDate() {
@@ -141,11 +142,19 @@ public class ConfigConstant {
         this.message = message;
     }
 
-    public ArrayList<String> getOpenidList() {
-        return openidList;
+    public boolean isEnableDaily() {
+        return enableDaily;
     }
 
-    public void setOpenidList(ArrayList<String> openidList) {
-        this.openidList = openidList;
+    public void setEnableDaily(boolean enableDaily) {
+        this.enableDaily = enableDaily;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

@@ -1,18 +1,18 @@
 #去申请 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
 wx:
   config:
-    appId: "fadadadasda"
+    appId: ""
     appSecret: ""
     #模板Id
     templateId: ""
     openidList:
       - ""
 #      - ""
-
 message:
   config:
+    lunarSwitch: true # 农历开关
     birthday1: "11-20" #生日日期
-    birthday2: "08-31"
+    birthday2: "08-03"
     togetherDate: "2021-04-23" #填你们在一起的那天日期
     message: "Have a happy day and love you"
 

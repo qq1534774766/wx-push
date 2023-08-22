@@ -19,6 +19,8 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -37,7 +39,7 @@ public class SendServiceImpl implements SendService {
     private ConfigConstant configConstant;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String  getAccessToken() {
+    private String getAccessToken() {
         //这里直接写死就可以，不用改，用法可以去看api
         String grant_type = "client_credential";
         //封装请求数据
@@ -52,7 +54,7 @@ public class SendServiceImpl implements SendService {
     }
 
     /**
-     * 发送微信消息
+     * 填充微信模板中的信息
      *
      * @return
      */
@@ -60,11 +62,13 @@ public class SendServiceImpl implements SendService {
     public String sendWeChatMsg() {
         String accessToken = getAccessToken();
         if (!StringUtils.hasText(accessToken)) {
-            logger.error("token获取失败，请检查：公众号的，appId、appSecret");
-            return "token获取失败，请检查：公众号的，appId、appSecret";
+            String errorMsg = "token获取失败，请检查：公众号的，appId、appSecret是否输入正确，务必重刷浏览器重新复制";
+            logger.error(errorMsg);
+            return errorMsg;
         }
         List<JSONObject> errorList = new ArrayList();
         HashMap<String, Object> resultMap = new HashMap<>();
+        JSONObject templateMsg = new JSONObject();
         //遍历用户的ID，保证每个用户都收到推送
         for (String opedId : configConstant.getOpenidList()) {
 
@@ -80,19 +84,19 @@ public class SendServiceImpl implements SendService {
                 //处理天气
                 JSONObject weatherResult = tianqiService.getWeatherByCity();
                 //城市
-                JSONObject city = JsonObjectUtil.packJsonObject(weatherResult.getString("city"),"#60AEF2");
+                JSONObject city = JsonObjectUtil.packJsonObject(weatherResult.getString("city"), "#60AEF2");
                 resultMap.put("city", city);
                 logger.info("city:{}", city);
                 //天气
-                JSONObject weather = JsonObjectUtil.packJsonObject(weatherResult.getString("wea"),"#b28d0a");
+                JSONObject weather = JsonObjectUtil.packJsonObject(weatherResult.getString("wea"), "#b28d0a");
                 resultMap.put("weather", weather);
                 logger.info("weather:{}", weather);
                 //最低气温
-                JSONObject minTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_night") + "°","#0ace3c");
+                JSONObject minTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_night") + "°", "#0ace3c");
                 resultMap.put("minTemperature", minTemperature);
                 logger.info("minTemperature:{}", minTemperature);
                 //最高气温
-                JSONObject maxTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_day") + "°","#dc1010");
+                JSONObject maxTemperature = JsonObjectUtil.packJsonObject(weatherResult.getString("tem_day") + "°", "#dc1010");
                 resultMap.put("maxTemperature", maxTemperature);
                 logger.info("maxTemperature:{}", maxTemperature);
                 //风
@@ -128,10 +132,19 @@ public class SendServiceImpl implements SendService {
 
             //生日
             try {
-                JSONObject birthDate1 = getBirthday(configConstant.getBirthday1(), date);
+                JSONObject birthDate1;
+                JSONObject birthDate2;
+                if (configConstant.getLunarSwitch()) {
+                    birthDate1 = getLunarBirthday(configConstant.getBirthday1(), date);
+                    birthDate2 = getLunarBirthday(configConstant.getBirthday2(), date);
+                } else {
+                    birthDate1 = getBirthday(configConstant.getBirthday1(), date);
+                    birthDate2 = getBirthday(configConstant.getBirthday2(), date);
+
+                }
                 resultMap.put("birthDate1", birthDate1);
-                logger.info("birthDate1:{}", birthDate1);
-                JSONObject birthDate2 = getBirthday(configConstant.getBirthday2(), date);
+                logger.info("birthDate1:{}", birthDate1)
+                ;
                 resultMap.put("birthDate2", birthDate2);
                 logger.info("birthDate2:{}", birthDate2);
             } catch (Exception e) {
@@ -168,7 +181,7 @@ public class SendServiceImpl implements SendService {
                 }
             }
             //封装数据并发送
-            sendMessage(accessToken, errorList, resultMap, opedId);
+            templateMsg = sendMessage(accessToken, errorList, resultMap, opedId);
         }
         JSONObject result = new JSONObject();
         if (errorList.size() > 0) {
@@ -176,12 +189,21 @@ public class SendServiceImpl implements SendService {
             result.put("errorData", errorList);
         } else {
             result.put("result", "信息推送成功！");
+            result.put("请求结构体", templateMsg);
             logger.info("信息推送成功！");
         }
         return result.toJSONString();
     }
 
-    private void sendMessage(String accessToken, List<JSONObject> errorList, HashMap<String, Object> resultMap, String opedId) {
+    /**
+     * 给公众号推送消息
+     *
+     * @param accessToken
+     * @param errorList
+     * @param resultMap
+     * @param opedId
+     */
+    private JSONObject sendMessage(String accessToken, List<JSONObject> errorList, HashMap<String, Object> resultMap, String opedId) {
         JSONObject templateMsg = new JSONObject(new LinkedHashMap<>());
         templateMsg.put("touser", opedId);
         templateMsg.put("template_id", configConstant.getTemplateId());
@@ -196,8 +218,15 @@ public class SendServiceImpl implements SendService {
             error.put("errorMessage", WeChatMsgResult.getString("errmsg"));
             errorList.add(error);
         }
+        return templateMsg;
     }
 
+    /**
+     * 计算在一起的天数
+     *
+     * @param date
+     * @return
+     */
     private JSONObject togetherDay(String date) {
         //在一起时间
         String togetherDay = "";
@@ -206,10 +235,41 @@ public class SendServiceImpl implements SendService {
         } catch (ParseException e) {
             logger.error("togetherDate获取失败" + e.getMessage());
         }
-        JSONObject togetherDateObj =JsonObjectUtil.packJsonObject(togetherDay,"#FEABB5");
+        JSONObject togetherDateObj = JsonObjectUtil.packJsonObject(togetherDay, "#FEABB5");
         return togetherDateObj;
     }
 
+    /**
+     * 计算农历生日
+     */
+    private JSONObject getLunarBirthday(String birthday, String date) {
+        long daysUntilNextLunarBirthday = 0L;
+        try {
+            // 将农历生日转换为当年的日期
+            LocalDate lunarBirthday = LocalDate.parse("2023-" + birthday);
+            // 将当天日期转换为LocalDate对象
+            LocalDate currentDate = LocalDate.parse(date);
+
+            // 如果当前日期已经过了农历生日，则计算下一年的农历生日
+            if (currentDate.isAfter(lunarBirthday)) {
+                lunarBirthday = lunarBirthday.plusYears(1);
+            }
+
+            // 计算距离下一次农历生日的天数
+            daysUntilNextLunarBirthday = ChronoUnit.DAYS.between(currentDate, lunarBirthday);
+        } catch (Exception e) {
+            logger.error("生日计算错误，请检测格式" + e.getMessage());
+        }
+        return JsonObjectUtil.packJsonObject(String.valueOf(daysUntilNextLunarBirthday) + "天", "#6EEDE2");
+    }
+
+    /**
+     * 计算生日
+     *
+     * @param birthday
+     * @param date
+     * @return
+     */
     private JSONObject getBirthday(String birthday, String date) {
         String birthDay = "无法识别";
         try {
@@ -225,13 +285,27 @@ public class SendServiceImpl implements SendService {
         } catch (ParseException e) {
             logger.error("togetherDate获取失败" + e.getMessage());
         }
-        return JsonObjectUtil.packJsonObject(birthDay,"#6EEDE2");
+        return JsonObjectUtil.packJsonObject(birthDay, "#6EEDE2");
     }
 
-    private String isContainsRain(String s){
-        return s.contains("雨")?"#1f95c5":"#b28d0a";
+    /**
+     * 天气含“雨”,设置为蓝色
+     *
+     * @param s
+     * @return
+     */
+    private String isContainsRain(String s) {
+        return s.contains("雨") ? "#1f95c5" : "#b28d0a";
     }
 
+    /**
+     * 处理微信后台发过来的文本，属高级功能，教程没给不用管
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @Override
     public String messageHandle(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("utf-8");
         Map<String, String> resultMap = MessageUtil.parseXml(request);

@@ -68,12 +68,6 @@
             <artifactId>xstream</artifactId>
             <version>1.4.7</version>
         </dependency>
-        <!--        农历配置-->
-        <dependency>
-            <groupId>com.xhinliang</groupId>
-            <artifactId>LunarCalendar</artifactId>
-            <version>4.0.7</version>
-        </dependency>
 
     </dependencies>
     <build>

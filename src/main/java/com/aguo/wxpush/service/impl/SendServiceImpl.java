@@ -5,10 +5,7 @@ import com.aguo.wxpush.entity.TextMessage;
 import com.aguo.wxpush.service.ProverbService;
 import com.aguo.wxpush.service.SendService;
 import com.aguo.wxpush.service.TianqiService;
-import com.aguo.wxpush.utils.DateUtil;
-import com.aguo.wxpush.utils.HttpUtil;
-import com.aguo.wxpush.utils.JsonObjectUtil;
-import com.aguo.wxpush.utils.MessageUtil;
+import com.aguo.wxpush.utils.*;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,13 +127,16 @@ public class SendServiceImpl implements SendService {
             }
 
 
-            //生日
+            //生日，升级——>支持农历生日啦
             try {
                 JSONObject birthDate1;
                 JSONObject birthDate2;
+
                 if (configConstant.getLunarSwitch()) {
-                    birthDate1 = getLunarBirthday(configConstant.getBirthday1(), date);
-                    birthDate2 = getLunarBirthday(configConstant.getBirthday2(), date);
+
+
+                    birthDate1 = LunarCalendar.getLunarBirthday(configConstant.getBirthday1());
+                    birthDate2 = LunarCalendar.getLunarBirthday(configConstant.getBirthday2());
                 } else {
                     birthDate1 = getBirthday(configConstant.getBirthday1(), date);
                     birthDate2 = getBirthday(configConstant.getBirthday2(), date);

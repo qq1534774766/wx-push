@@ -1,32 +1,42 @@
-#去申请 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+#去申请一个微信测试号 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
 wx:
   config:
     appId: ""
     appSecret: ""
-    #模板Id
+    #模板Id，这是你新增模板后的ID
     templateId: ""
+    # 这是OpenId，也就是你扫码关注的微信号的id，在微信后台看
     openidList:
       - ""
 #      - ""
+# 这些是配置生日、在一起时间
 message:
   config:
-    lunarSwitch: true # 农历开关
-    birthday1: "11-20" #生日日期
-    birthday2: "08-03"
+    #  false：关闭
+    # true：开启
+    lunarSwitch: true # 农历开关 true：开启 false：关闭
+    birthday1: "11-20" # 生日日期
+    birthday2: "08-03" # 新历与农历都用数字表示。例如 08-03 表示 8月3号，也可以表示农历八月初三。
     togetherDate: "2021-04-23" #填你们在一起的那天日期
     message: "Have a happy day and love you"
 
-#去申请 https://tianqiapi.com/user/login
+# 这是配置天气的，去申请 https://tianqiapi.com/user/login
 weather:
   config:
+    # 这两个值来自提供天气服务的网站页面上的
     appid: ""
     appSecret: ""
+    # 广州就广州，不要画蛇添足追加个“市”变成广州市
+    # 天河√，天河区×  北京√，北京市×
     city: "广州"
-#注册并购买第二档次，有券，直接白嫖 https://www.apispace.com/eolink/api/myjj/introduction
+
+#注册并购买，有券，直接白嫖 https://www.apispace.com/eolink/api/myjj/introduction
 ApiSpace:
   enableDaily: true #【新增功能】  true：开启每日一句，false：则不开启
+  # token来自名言警句的网站，直接复制即可
   token: ""
 
+# 服务器端口号，遇到端口冲突时修改
 server:
   port: 8081
 

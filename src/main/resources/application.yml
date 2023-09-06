@@ -36,6 +36,12 @@ ApiSpace:
   # token来自名言警句的网站，直接复制即可
   token: ""
 
+# 9月6号有道翻译取消免费接口，因此需申请有道翻译服务 https://ai.youdao.com/product-fanyi-text.s
+youdao:
+  appKey_YouDao: "" #即 应用ID
+  appSecret_YouDao: "" # 即 应用秘钥
+
+
 # 服务器端口号，遇到端口冲突时修改
 server:
   port: 8081

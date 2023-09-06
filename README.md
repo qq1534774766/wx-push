@@ -139,6 +139,26 @@ QQ群：
 
   ![image-20230823172912665](https://article.biliimg.com/bfs/article/a6de777f0d3594a93cf5dc6d261c943845ba1236.png)
 
+## 1.4 翻译接口申请
+
+> 用于名言名句的翻译功能。如果你不打算使用名言名句的功能，这个环节可以略过。
+
+[点击申请](https://ai.youdao.com/product-fanyi-text.s)
+
+1. 注册登录完成之后，点击**立即使用**
+
+   ![image-20230905143957549](https://article.biliimg.com/bfs/article/577de5cbce9e490e20ea117ce92695f645ae2890.png)
+
+2. 创建应用
+
+   ![image-20230905144127808](https://article.biliimg.com/bfs/article/d3548176413edbd2e5491f9a84183a525946708c.png)
+
+3. 创建信息参考
+
+   ![image-20230905144245050](https://article.biliimg.com/bfs/article/b2758dd0e487f199c5e2ab2208aa3efceb50dc03.png)
+
+4.
+
 # 面向开发者
 
 > 作为开发者，肯定有属于自己一款的代码编辑器把，没有的话可以下载，这里使用的是IDEA代码编辑器。

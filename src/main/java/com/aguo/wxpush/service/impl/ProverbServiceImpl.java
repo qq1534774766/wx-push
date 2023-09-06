@@ -2,6 +2,8 @@ package com.aguo.wxpush.service.impl;
 
 import com.aguo.wxpush.constant.ConfigConstant;
 import com.aguo.wxpush.service.ProverbService;
+import com.aguo.wxpush.utils.AuthV3Util;
+import com.aguo.wxpush.utils.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
@@ -9,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -53,6 +59,27 @@ public class ProverbServiceImpl implements ProverbService {
         return proverb;
     }
 
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+
+    }
+
+    private static Map<String, String[]> createRequestParams(String q) {
+        /*
+         * note: 将下列变量替换为需要请求的参数
+         * 取值参考文档: https://ai.youdao.com/DOCSIRMA/html/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91/API%E6%96%87%E6%A1%A3/%E6%96%87%E6%9C%AC%E7%BF%BB%E8%AF%91%E6%9C%8D%E5%8A%A1/%E6%96%87%E6%9C%AC%E7%BF%BB%E8%AF%91%E6%9C%8D%E5%8A%A1-API%E6%96%87%E6%A1%A3.html
+         */
+        String from = "zh-CHS";
+        String to = "en";
+//        String vocabId = "您的用户词表ID";
+
+        return new HashMap<String, String[]>() {{
+            put("q", new String[]{q});
+            put("from", new String[]{from});
+            put("to", new String[]{to});
+//            put("vocabId", new String[]{vocabId});
+        }};
+    }
+
     /**
      * 翻译中文为英文
      *
@@ -63,17 +90,17 @@ public class ProverbServiceImpl implements ProverbService {
     public String translateToEnglish(String sentence) {
         String result = null;
         try {
-            OkHttpClient client = new OkHttpClient().newBuilder().build();
-            Request request = new Request.Builder()
-                    .url("https://fanyi.youdao.com/translate?&doctype=json&type=AUTO&i=" + sentence)
-                    .get()
-                    .addHeader("Content-Type", "")
-                    .build();
-            Response response = client.newCall(request).execute();
-            result = response.body().string();
-            //解析
-            JSONObject jsonObject = JSONObject.parseObject(result);
-            result = jsonObject.getJSONArray("translateResult").getJSONArray(0).getJSONObject(0).getString("tgt");
+            // 添加请求参数
+            Map<String, String[]> params = createRequestParams(sentence);
+            // 添加鉴权相关参数
+            AuthV3Util.addAuthParams(configConstant.getAppKey_YouDao(), configConstant.getAppSecret_YouDao(), params);
+            // 请求api服务
+            byte[] resultb = HttpUtil.doPost("https://openapi.youdao.com/api", null, params, "application/json");
+            // 打印返回结果
+
+            result = new String(resultb, StandardCharsets.UTF_8);
+            result = JSONObject.parseObject(result).getJSONArray("translation").get(0).toString();
+//            System.exit(1);
         } catch (Exception e) {
             e.printStackTrace();
         }

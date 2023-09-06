@@ -50,6 +50,29 @@ public class ConfigConstant {
     @Value("${ApiSpace.token}")
     public String token;
 
+    @Value("${youdao.appKey_YouDao}")
+    public String appKey_YouDao;
+
+    @Value("${youdao.appSecret_YouDao}")
+    public String appSecret_YouDao;
+
+
+    public String getAppKey_YouDao() {
+        return appKey_YouDao;
+    }
+
+    public void setAppKey_YouDao(String appKey_YouDao) {
+        this.appKey_YouDao = appKey_YouDao;
+    }
+
+    public String getAppSecret_YouDao() {
+        return appSecret_YouDao;
+    }
+
+    public void setAppSecret_YouDao(String appSecret_YouDao) {
+        this.appSecret_YouDao = appSecret_YouDao;
+    }
+
     public void setAppId(String appId) {
         this.appId = appId;
     }
